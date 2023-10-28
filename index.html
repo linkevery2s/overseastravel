@@ -104,7 +104,7 @@
 
       for (let i = 0; i < arr.length; i++) {
 
-        info.innerHTML += "<li><h2>" + arr[i].querySelector("title").textContent + "</h2>" + arr[i].querySelector("leaveDate").textContent + "<br>" + arr[i].querySelector("lead").textContent.replace("●", "") + "</li>";
+        info.innerHTML += "<li><h2>" + arr[i].querySelector("title").textContent + "</h2>" + arr[i].querySelector("leaveDate").textContent + "<br>" + arr[i].querySelector("lead").textContent.replaceAll("●", "") + "</li>";
 
       }
 
