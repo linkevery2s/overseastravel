@@ -30,6 +30,9 @@
     integrity="sha512-GWzVrcGlo0TxTRvz9ttioyYJ+Wwk9Ck0G81D+eO63BaqHaJ3YZX9wuqjwgfcV/MrB2PhaVX9DkYVhbFpStnqpQ=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+  <!--CSSMAP-->
+  <link rel="stylesheet" type="text/css" href="cssmap-continents/cssmap-continents.css" media="screen" />
+
   <style>
     html {
       width: 100%;
@@ -75,46 +78,9 @@
       padding: 0 0 70px 0;
       z-index: 2;
       width: 90%;
-      max-width: 600px;
+      max-width: 800px;
       left: 50%;
       transform: translate(-50%);
-    }
-
-    .cursor-pointer,
-    .korai {
-      border: 1px solid #000000;
-    }
-
-    #update_time {
-      color: #95949a;
-      font-weight: bolder;
-    }
-
-    .source {
-      color: #95949a;
-    }
-
-    .source a {
-      border-bottom: 1px dotted #95949a;
-      padding-bottom: 1px;
-    }
-
-    /*#update {
-      right: 5px;
-      bottom: 5px;
-      position: absolute;
-      color: #9fa0a0;
-    }*/
-
-    .kaisetu-btn {
-      color: #ffffff;
-      background: #eb6ea5;
-      cursor: pointer;
-      font-weight: bolder;
-    }
-
-    .kaisetu {
-      display: none;
     }
 
     #overlay {
@@ -148,33 +114,6 @@
       background: #ffffff;
       padding: .3em;
       border-radius: .3em;
-    }
-
-    #image-link {
-      width: 100%;
-      height: 80%;
-      max-height: 700px;
-    }
-
-    .image_border {
-      border: 1px solid #000000;
-      height: 100%;
-      max-height: 500px;
-
-    }
-
-    .main a img {
-      border: 1px solid #000000;
-    }
-
-    #literature {
-      color: #95949a;
-      font-weight: bolder;
-    }
-
-    #literature a {
-      border-bottom: 1px dotted #95949a;
-      padding-bottom: 2px;
     }
 
     .overview {
@@ -296,22 +235,6 @@
       z-index: 5;
     }
 
-    .item_title {
-      color: #19448e;
-      font-weight: bolder;
-      display: flex;
-    }
-
-    .item_ti {
-      color: #19448e;
-      display: flex;
-    }
-
-    #img_midashi {
-      display: flex;
-      width: 30px;
-    }
-
     .pagetop {
       height: 40px;
       width: 40px;
@@ -335,42 +258,6 @@
       transform: translateY(20%) rotate(-45deg);
     }
 
-    input {
-      color: rgba(0, 119, 184, 0.5);
-      border: 1px solid rgba(0, 0, 0, .5);
-      font-size: 1.2em;
-      font-weight: bolder;
-      height: 45px;
-      width: 90%;
-    }
-
-    input::-webkit-input-placeholder {
-      color: rgba(0, 119, 184, 0.5);
-    }
-
-    #exp {
-      /*background: rgba(131, 204, 210, 1);*/
-      background: #9d5b8b;
-      font-weight: bolder;
-      border-radius: .3em;
-      color: #ffffff;
-      cursor: pointer;
-    }
-
-    #exp:hover {
-      background: #eb6ea5;
-    }
-
-    .item {
-      height: 50px;
-      line-height: 50px;
-      cursor: pointer;
-      font-weight: bolder;
-    }
-
-    .item:nth-child(odd) {
-      background: rgba(242, 242, 242, .5);
-    }
   </style>
 
   <link rel="manifest" href="./manifest.json">
@@ -403,328 +290,16 @@
 
   <div class="main">
 
-    <div class="px-5 pt-3 pb-1 mb-5 border-double border-4 border-black rounded-xl relative" id="turukame">
-      <div class="item_title text-xl mb-3"><img src="./images/icon/rakugo.svg" id="img_midashi" alt="rakugoのアイコン"> 鶴亀算
-      </div>
-      <div class="grid grid-cols-2 gap-2 mb-5">
-        <div><a href="./data/turukame1.jpg" data-lightbox="turukame" data-title="鶴亀算"><img src="./data/turukame1.jpg"
-              width="100%" alt="鶴亀算"></a></div>
-        <div><a href="./data/turukame2.jpg" data-lightbox="turukame" data-title="現代語訳"><img src="./data/turukame2.jpg"
-              width="100%" alt="現代語訳"></a></div>
-      </div>
-
-      <span class="kaisetu-btn px-3 py-2 my-3 rounded-lg" onclick="below(0)">解 説 <i
-          class="fa-solid fa-circle-chevron-down"></i></span>
-
-      <div id="0" class="kaisetu mt-3">
-        <h3 class="text-xl my-5" id="manual_h3">模範回答</h3>
-        <p>鶴と亀の足の本数の差は、$4 - 2 = 2$本である。</p>
-        <p class="my-3">今、$100$ 匹全てが亀とすると、足の本数は、$4 × 100 = 400$本となる。</p>
-        <p>実際の足の本数は、$272$本なので、$400 - 272 = 128$本の差額が鶴の足の数となる。</p>
-        <p class="my-3">よって、鶴は、$128 ÷ 2 = 64$ 羽と求められる。</p>
-        <p>ゆえに、亀は、$100 - 64 = 36$ 匹となる。</p>
-
-
-        <h3 class="text-xl my-5" id="manual_h3">連立方程式による解法</h3>
-        <p>鶴を$x$羽、亀を$y$匹とする。</p>
-        <p class="my-3">鶴と亀の合計が$100$羽（匹）いるので、</p>
-        <p>$x + y = 100 \cdots $ ①</p>
-        <p class="my-3">足の数の合計が$272$本なので、</p>
-        <p>$ 2x + 4y = 272 \cdots $ ②</p>
-        <p class="my-3">①、②の連立方程式を解くと、</p>
-        <p>$x = 64$、$y = 36$</p>
-        <p class="mt-3">よって、鶴 $64$ 羽、亀 $36$ 匹となる。</p>
-
-        <p class="mt-3">答え：鶴 $64$ 羽、亀 $36$ 匹</p>
-
-      </div>
-
-      <div id="literature" class="text-xs mt-5">
-        「算法点竄指南録」坂部広胖 著 ほか , <a href="https://dl.ndl.go.jp/pid/8942840" target="_blank">国立国会図書館デジタルコレクション</a> ,
-        インターネット公開（保護期間満了）
-      </div>
-
-      <div id="update_time" class="text-xs text-right mt-3"><time datetime="2024-06-17"
-          itemprop="modified">データ更新：2024.06.17</time>
-      </div>
-
+    <div id="map-continents">
+      <ul class="continents">
+        <li class="c1"><a href="map.html#3/3.51/20.30">Africa</a></li>
+        <li class="c2"><a href="map.html#3/38.96/113.99">Asia</a></li>
+        <li class="c3"><a href="map.html#3/-18.31/135.62">Australia</a></li>
+        <li class="c4"><a href="map.html#3/53.12/9.23">Europe</a></li>
+        <li class="c5"><a href="map.html#3/46.07/-105.03">North America</a></li>
+        <li class="c6"><a href="map.html#3/-29.54/-66.18">South America</a></li>
+      </ul>
     </div>
-
-    <div class="px-5 pt-3 pb-1 mb-5 border-double border-4 border-black rounded-xl relative" id="tawarasugi">
-      <div class="item_title text-xl mb-3"><img src="./images/icon/genseirin.svg" id="img_midashi" alt="genseirinのアイコン">
-        俵杉算</div>
-      <div class="grid grid-cols-2 gap-2 mb-5">
-        <div><a href="./data/tawarasugi1.jpg" data-lightbox="tawarasugi" data-title="俵杉算"><img
-              src="./data/tawarasugi1.jpg" alt="俵杉算" width="100%"></a></div>
-        <div></div>
-      </div>
-
-      <span class="kaisetu-btn px-3 py-2 my-3 rounded-lg" onclick="below(1)">解 説 <i
-          class="fa-solid fa-circle-chevron-down"></i></span>
-
-      <div id="1" class="kaisetu mt-3">
-        <h3 class="text-xl my-5" id="manual_h3">模範回答</h3>
-        <p>あああ</p>
-      </div>
-
-      <div id="literature" class="text-xs mt-5">
-        『新編塵劫記 3巻』吉田光由 著, <a href="https://dl.ndl.go.jp/pid/3508170" target="_blank">国立国会図書館デジタルコレクション</a> ,
-        インターネット公開（保護期間満了）
-      </div>
-
-      <div id="update_time" class="text-xs text-right mt-3"><time datetime="2024-07-04"
-          itemprop="modified">データ更新：2024.07.04</time>
-      </div>
-
-    </div>
-
-    <div class="px-5 pt-3 pb-1 mb-5 border-double border-4 border-black rounded-xl relative" id="aburawake">
-      <div class="item_title text-xl mb-3"><img src="./images/icon/tempura.svg" id="img_midashi" alt=tempuraのアイコン">
-        油分け算</div>
-      <div class="grid grid-cols-2 gap-2 mb-5">
-        <div><a href="./data/kuku1.jpg" data-lightbox="kuku" data-title="口遊（くちずさみ）源為憲<br>出典：国立国会図書館デジタルコレクション"><img
-              src="./data/kuku1.jpg" alt="日本最古の九九表" width="100%"></a></div>
-        <div><img src="./data/kuku1.jpg" width="100%"></div>
-      </div>
-
-      <span class="kaisetu-btn px-3 py-2 my-3 rounded-lg" onclick="below(2)">解 説 <i
-          class="fa-solid fa-circle-chevron-down"></i></span>
-
-      <div id="2" class="kaisetu mt-3">
-        <h3 class="text-xl my-5" id="manual_h3">模範回答</h3>
-        <p>いいい</p>
-      </div>
-
-      <div id="literature" class="text-xs mt-5">
-        『新編塵劫記 3巻』吉田光由 著, <a href="https://dl.ndl.go.jp/pid/3508170" target="_blank">国立国会図書館デジタルコレクション</a> ,
-        インターネット公開（保護期間満了）
-      </div>
-
-      <div id="update_time" class="text-xs text-right mt-3"><time datetime="2024-07-04"
-          itemprop="modified">データ更新：2024.07.04</time>
-      </div>
-
-    </div>
-
-    <div class="px-5 pt-3 pb-1 mb-5 border-double border-4 border-black rounded-xl relative" id="yakushi">
-      <div class="item_title text-xl mb-3"><img src="./images/icon/kokyo.svg" id="img_midashi" alt="kokyoのアイコン">
-        薬師算</div>
-      <div class="grid grid-cols-2 gap-2 mb-5">
-        <div><a href="./data/kuku1.jpg" data-lightbox="kuku" data-title="口遊（くちずさみ）源為憲<br>出典：国立国会図書館デジタルコレクション"><img
-              src="./data/kuku1.jpg" alt="日本最古の九九表" width="100%"></a></div>
-        <div><img src="./data/kuku1.jpg" width="100%"></div>
-      </div>
-
-      <span class="kaisetu-btn px-3 py-2 my-3 rounded-lg" onclick="below(3)">解 説 <i
-          class="fa-solid fa-circle-chevron-down"></i></span>
-
-      <div id="3" class="kaisetu mt-3">
-        <h3 class="text-xl my-5" id="manual_h3">模範回答</h3>
-        <p>ううう</p>
-      </div>
-
-      <div id="literature" class="text-xs mt-5">
-        『新編塵劫記 3巻』吉田光由 著, <a href="https://dl.ndl.go.jp/pid/3508170" target="_blank">国立国会図書館デジタルコレクション</a> ,
-        インターネット公開（保護期間満了）
-      </div>
-
-      <div id="update_time" class="text-xs text-right mt-3"><time datetime="2024-07-04"
-          itemprop="modified">データ更新：2024.07.04</time>
-      </div>
-
-    </div>
-
-    <div class="px-5 pt-3 pb-1 mb-5 border-double border-4 border-black rounded-xl relative" id="seihatikakukei">
-      <div class="item_title text-xl mb-3"><img src="./images/icon/ninja.svg" id="img_midashi" alt="ninjaのアイコン">
-        正八角形の面積</div>
-      <div class="grid grid-cols-2 gap-2 mb-5">
-        <div><a href="./data/seihatikakukei1.jpg" data-lightbox="seihatikakukei"
-            data-title="塵劫記（じんこうき）吉田光由<br>出典：国立国会図書館デジタルコレクション CC BY 4.0"><img src="./data/seihatikakukei1.jpg"
-              alt="日本最古の九九表" width="100%"></a></div>
-        <div><a href="./data/seihatikakukei2.jpg" data-lightbox="seihatikakukei"
-            data-title="塵劫記（じんこうき）吉田光由<br>出典：国立国会図書館デジタルコレクション CC BY 4.0"><img src="./data/seihatikakukei2.jpg"
-              alt="日本最古の九九表" width="100%"></a></div>
-      </div>
-
-      <span class="kaisetu-btn px-3 py-2 my-3 rounded-lg" onclick="below(4)">解 説 <i
-          class="fa-solid fa-circle-chevron-down"></i></span>
-
-      <div id="4" class="kaisetu mt-3">
-        <h3 class="text-xl my-5" id="manual_h3">模範回答</h3>
-        <p>えええ</p>
-      </div>
-
-      <div id="literature" class="text-xs mt-5">
-        『新編塵劫記 3巻』吉田光由 著, <a href="https://dl.ndl.go.jp/pid/3508170" target="_blank">国立国会図書館デジタルコレクション</a> ,
-        インターネット公開（保護期間満了）
-      </div>
-
-      <div id="update_time" class="text-xs text-right mt-3"><time datetime="2024-07-06"
-          itemprop="modified">データ更新：2024.07.06</time>
-      </div>
-
-    </div>
-
-    <div class="px-5 pt-3 pb-1 mb-5 border-double border-4 border-black rounded-xl relative" id="soujihi">
-      <div class="item_title text-xl mb-3"><img src="./images/icon/jinja.svg" id="img_midashi" alt="jinjaのアイコン">
-        相似比</div>
-      <div class="grid grid-cols-2 gap-2 mb-5">
-        <div><a href="./data/soujihi1.jpg" data-lightbox="soujihi"
-            data-title="塵劫記（じんこうき）吉田光由<br>出典：国立国会図書館デジタルコレクション CC BY 4.0"><img src="./data/soujihi1.jpg" alt="日本最古の九九表"
-              width="100%"></a></div>
-        <div><img src="./data/kuku1.jpg" width="100%"></div>
-      </div>
-
-      <span class="kaisetu-btn px-3 py-2 my-3 rounded-lg" onclick="below(5)">解 説 <i
-          class="fa-solid fa-circle-chevron-down"></i></span>
-
-      <div id="5" class="kaisetu mt-3">
-        <h3 class="text-xl my-5" id="manual_h3">模範回答</h3>
-        <p>おおお</p>
-      </div>
-
-      <div id="literature" class="text-xs mt-5">
-        『新編塵劫記 3巻』吉田光由 著, <a href="https://dl.ndl.go.jp/pid/3508170" target="_blank">国立国会図書館デジタルコレクション</a> ,
-        インターネット公開（保護期間満了）
-      </div>
-
-      <div id="update_time" class="text-xs text-right mt-3"><time datetime="2024-07-04"
-          itemprop="modified">データ更新：2024.07.04</time>
-      </div>
-
-    </div>
-
-    <div class="px-5 pt-3 pb-1 mb-5 border-double border-4 border-black rounded-xl relative" id="koraisokuryou">
-      <div class="item_title text-xl mb-3"><img src="./images/icon/kyampu.svg" id="img_midashi" alt="kyampuのアイコン">
-        古来の測量技術</div>
-      <div class="grid grid-cols-2 gap-2 mb-5">
-        <div><a href="./data/korai1.jpg" data-lightbox="古来の測量技術" data-title="青森県三内丸山遺跡"><img src="./data/korai1.jpg"
-              alt="青森県三内丸山遺跡" width="100%"></a></div>
-        <div class="cursor-pointer" onclick="korai()"><img src="./data/korai2.jpg" alt="青森県三内丸山遺跡（AR・VR）" width="100%">
-        </div>
-      </div>
-
-      <span class="kaisetu-btn px-3 py-2 my-3 rounded-lg" onclick="below(6)">解 説 <i
-          class="fa-solid fa-circle-chevron-down"></i></span>
-
-      <div id="6" class="kaisetu mt-3">
-        <p>鶴と亀の足の本数の差は、$4 - 2 = 2$本である。</p>
-      </div>
-
-      <div id="literature" class="text-xs mt-5">
-        『新編塵劫記 3巻』吉田光由 著, <a href="https://dl.ndl.go.jp/pid/3508170" target="_blank">国立国会図書館デジタルコレクション</a> ,
-        インターネット公開（保護期間満了）
-      </div>
-
-      <div id="update_time" class="text-xs text-right mt-3"><time datetime="2024-07-04"
-          itemprop="modified">データ更新：2024.07.05</time>
-      </div>
-
-    </div>
-
-    <div class="px-5 pt-3 pb-1 mb-5 border-double border-4 border-black rounded-xl relative" id="tabibito">
-      <div class="item_title text-xl mb-3"><img src="./images/icon/torekkingu.svg" id="img_midashi"
-          alt="torekkinguのアイコン">
-        旅人算</div>
-      <div class="grid grid-cols-2 gap-2 mb-5">
-        <div><a href="./data/kuku1.jpg" data-lightbox="kuku" data-title="口遊（くちずさみ）源為憲<br>出典：国立国会図書館デジタルコレクション"><img
-              src="./data/kuku1.jpg" alt="日本最古の九九表" width="100%"></a></div>
-        <div><img src="./data/kuku1.jpg" width="100%"></div>
-      </div>
-
-      <span class="kaisetu-btn px-3 py-2 my-3 rounded-lg" onclick="below(7)">解 説 <i
-          class="fa-solid fa-circle-chevron-down"></i></span>
-
-      <div id="7" class="kaisetu mt-3">
-        <h3 class="text-xl my-5" id="manual_h3">模範回答</h3>
-        <p>鶴と亀の足の本数の差は、$4 - 2 = 2$本である。</p>
-      </div>
-
-      <div id="literature" class="text-xs mt-5">
-        『新編塵劫記 3巻』吉田光由 著, <a href="https://dl.ndl.go.jp/pid/3508170" target="_blank">国立国会図書館デジタルコレクション</a> ,
-        インターネット公開（保護期間満了）
-      </div>
-
-      <div id="update_time" class="text-xs text-right mt-3"><time datetime="2024-07-04"
-          itemprop="modified">データ更新：2024.07.04</time>
-      </div>
-
-    </div>
-
-    <div class="px-5 pt-3 pb-1 mb-5 border-double border-4 border-black rounded-xl relative" id="karasu">
-      <div class="item_title text-xl mb-3"><img src="./images/icon/koyo.svg" id="img_midashi" alt="koyoのアイコン"> からす算
-      </div>
-      <div class="grid grid-cols-2 gap-2 mb-5">
-        <div><a href="./data/karasu1.jpg" data-lightbox="karasu"
-            data-title="塵劫記（じんこうき）吉田光由<br>出典：国立国会図書館デジタルコレクション CC BY 4.0"><img src="./data/karasu1.jpg" width="100%"
-              alt="からす算"></a></div>
-        <div><a href="./data/karasu2.jpg" data-lightbox="karasu" data-title="現代語訳"><img src="./data/karasu2.jpg"
-              width="100%" alt="からす算（現代語訳）"></a></div>
-      </div>
-
-      <span class="kaisetu-btn px-3 py-2 my-3 rounded-lg" onclick="below(8)">解 説 <i
-          class="fa-solid fa-circle-chevron-down"></i></span>
-
-      <div id="8" class="kaisetu mt-3">
-        <p class="mb-3">解法は、$999 × 999 × 999$ である。</p>
-        <h3 class="text-xl my-5" id="manual_h3">その１</h3>
-        <p class="my-3">$(1000 - 1) × (1000 - 1)$</p>
-        <p>$= 1000000 - 2 × 1000 + 1$</p>
-        <p class="my-3">$= 998001 $</p>
-        <p>$ 998001 × (1000 - 1)$</p>
-        <p class="my-3">$= 998001000 - 998001$</p>
-        <p>$= 997002999$</p>
-
-        <h3 class="text-xl my-5" id="manual_h3">その２</h3>
-        <p>$(1000 - 1)^3$</p>
-
-        <p class="my-3">$=1000000000 - 3 × 1000^2 × 1 + 3 × 1000 × (-1)^2 -1$</p>
-
-        <p>$= 997002999$</p>
-
-        <p class="mt-3">答え：$9$ 億 $9700$ 万 $2999$ 回</p>
-
-      </div>
-
-      <div id="literature" class="text-xs mt-5">
-        『新編塵劫記 3巻』吉田光由 著, <a href="https://dl.ndl.go.jp/pid/3508170" target="_blank">国立国会図書館デジタルコレクション</a> ,
-        インターネット公開（保護期間満了）
-      </div>
-
-      <div id="update_time" class="text-xs text-right mt-3"><time datetime="2024-06-17"
-          itemprop="modified">データ更新：2024.06.17</time>
-      </div>
-
-    </div>
-
-    <div class="px-5 pt-3 pb-1 mb-5 border-double border-4 border-black rounded-xl relative" id="kuku">
-      <div class="item_title text-xl mb-3"><img src="./images/icon/mokko.svg" id="img_midashi" alt="mokkoのアイコン">
-        日本最古の九九表</div>
-      <div class="grid grid-cols-2 gap-2 mb-5">
-        <div><a href="./data/kuku1.jpg" data-lightbox="kuku" data-title="口遊（くちずさみ）源為憲<br>出典：国立国会図書館デジタルコレクション"><img
-              src="./data/kuku1.jpg" alt="日本最古の九九表" width="100%"></a></div>
-        <div><img src="./data/kuku1.jpg" width="100%"></div>
-      </div>
-
-      <span class="kaisetu-btn px-3 py-2 my-3 rounded-lg" onclick="below(9)">解 説 <i
-          class="fa-solid fa-circle-chevron-down"></i></span>
-
-      <div id="9" class="kaisetu mt-3">
-        <h3 class="text-xl my-5" id="manual_h3">模範回答</h3>
-        <p>鶴と亀の足の本数の差は、$4 - 2 = 2$本である。</p>
-      </div>
-
-      <div id="literature" class="text-xs mt-5">
-        『新編塵劫記 3巻』吉田光由 著, <a href="https://dl.ndl.go.jp/pid/3508170" target="_blank">国立国会図書館デジタルコレクション</a> ,
-        インターネット公開（保護期間満了）
-      </div>
-
-      <div id="update_time" class="text-xs text-right mt-3"><time datetime="2024-07-04"
-          itemprop="modified">データ更新：2024.07.04</time>
-      </div>
-
-    </div>
-
 
   </div><!-- main -->
 
@@ -1108,6 +683,20 @@
     })
 
   </script>
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+
+      // CSSMap;
+      $("#map-continents").CSSMap({
+        "size": 1450
+      });
+      // END OF THE CSSMap;
+
+    });
+  </script>
+
+  <script type="text/javascript" src="./jquery.cssmap.min.js"></script>
 
   <!-- Facebookシェアボタン -->
   <div id="fb-root"></div>
