@@ -33,9 +33,7 @@
   <!--CSSMAP-->
   <link rel="stylesheet" type="text/css" href="cssmap-continents/cssmap-continents.css" media="screen" />
 
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-
+  <script src="./jquery-1.11.3.min.js"></script>
   <script type="text/javascript" src="./jquery.cssmap.min.js"></script>
 
   <script type="text/javascript">
@@ -59,7 +57,6 @@
     }
 
     body {
-      background: #ffffff;
       width: 100%;
       height: 100%;
       padding: 0;
@@ -67,16 +64,14 @@
       font-family: "Meiryo", "Hiragino Maru Gothic Pro", sans-serif;
     }
 
-    h1 {
-      color: #ffffff;
-    }
-
     .header {
       width: 100%;
       position: fixed;
       top: 0;
       z-index: 5;
-      background: #674196;
+      background: rgba(255,255,255,.7);
+      color: #000000;
+      border-bottom: 1px dotted #000000;
     }
 
     .last_update {
@@ -94,10 +89,7 @@
       margin: 80px 0 0 0;
       padding: 0 0 70px 0;
       z-index: 2;
-      width: 90%;
-      max-width: 800px;
-      left: 50%;
-      transform: translate(-50%);
+      width: 100%;
     }
 
     #overlay {
@@ -112,25 +104,14 @@
     }
 
     #beginner,
-    #image-src,
     #manual,
     #post,
     #data-source,
-    #share,
-    #search {
-      display: none;
-      height: 85%;
-      max-height: 800px;
-      left: 50%;
-      position: fixed;
-      top: 50%;
-      transform: translate(-50%, -50%);
-      width: 95%;
-      max-width: 600px;
+    #share{
       z-index: 11;
-      background: #ffffff;
-      padding: .3em;
-      border-radius: .3em;
+      max-width: 800px;
+      left: 50%;
+
     }
 
     .overview {
@@ -140,31 +121,6 @@
     .overview2 {
       height: 70%;
       max-height: 650px;
-    }
-
-    #closed-btn,
-    #closed-btn2,
-    #closed-btn3,
-    #closed-btn4,
-    #closed-btn5 {
-      position: absolute;
-      right: 4px;
-      color: #ffffff;
-      background: #eb6ea5;
-      cursor: pointer;
-      text-align: center;
-      font-weight: bolder;
-      border-radius: .3em;
-    }
-
-    #closed-btn:hover,
-    #closed-btn2:hover,
-    #closed-btn3:hover,
-    #closed-btn4:hover,
-    #closed-btn5:hover {
-      background: #ffffff;
-      color: #9d5b8b;
-      border: 1px solid #9d5b8b;
     }
 
     #manual_h3 {
@@ -184,9 +140,8 @@
       position: fixed;
       top: 10px;
       left: 10px;
-      border: 1px solid #ffffff;
+      border: 1px solid #000000;
       background: transparent;
-      color: #ffffff;
       padding: .5rem;
       font-size: 1rem;
       cursor: pointer;
@@ -209,18 +164,17 @@
       border-radius: .3em;
     }
 
-    .share-btn {
+    .menu-btn {
       position: fixed;
       top: 10px;
       right: 10px;
-      border: 1px solid #ffffff;
+      border: 1px solid #000000;
       background: transparent;
-      color: #ffffff;
       padding: .5rem;
       font-size: 1rem;
       cursor: pointer;
       line-height: 1.2;
-      border-radius: 100%;
+      border-radius: .3em;
     }
 
     .footer {
@@ -228,27 +182,20 @@
       position: fixed;
       bottom: 0;
       z-index: 5;
-      background: #674196;
-      color: #ffffff;
-    }
-
-    .footer .grid {
-      font-weight: bolder;
+      background: rgba(255,255,255,.7);
+      color: #000000;
+      border-top: 1px dotted #000000;
     }
 
     .footer a {
-      border-bottom: 1px dotted #ffffff;
+      border-bottom: 1px dotted #000000;
       padding-bottom: 1px;
-    }
-
-    .grid a {
-      border-bottom: none;
     }
 
     .sns-fb {
       position: fixed;
       left: 3px;
-      bottom: 64px;
+      bottom: 37px;
       z-index: 5;
     }
 
@@ -256,9 +203,9 @@
       height: 40px;
       width: 40px;
       position: fixed;
-      right: 4px;
-      bottom: 64px;
-      background: rgba(235, 110, 165, .8);
+      right: 3px;
+      bottom: 37px;
+      background: rgba(230, 0, 51, 1);
       border-radius: 50%;
       display: flex;
       justify-content: center;
@@ -274,7 +221,6 @@
       border-right: 3px solid #ffffff;
       transform: translateY(20%) rotate(-45deg);
     }
-
   </style>
 
   <link rel="manifest" href="./manifest.json">
@@ -299,11 +245,14 @@
       1.0</div>-->
 
     <div class="zoom-btn"><i class="fa-solid fa-xl fa-expand"></i></div>
-    <div class="share-btn"><i class="fa-regular fa-comments"></i></div>
+    <div class="menu-btn"><i class="fa-solid fa-xl fa-bars"></i></div>
 
   </div>
 
   <div class="zoom-btn2"><i class="fa-solid fa-xl fa-expand"></i></div>
+
+  <!-- ポップアップ用のoverlay -->
+  <div id="overlay"></div>
 
   <div class="main">
 
@@ -318,19 +267,15 @@
       </ul>
     </div>
 
-  </div><!-- main -->
-
-  <!-- ポップアップ用のoverlay -->
-  <div id="overlay"></div>
-
+    <center>
   <!-- はじめに -->
-  <div id="beginner"><span id="closed-btn" class="py-2 px-3 text-xs">閉じる</span>
+  <div id="beginner">
     <h3 class="text-2xl text-center"><i class="fa-solid fa-user"></i> はじめに</h3>
 
-    <div class="overflow-y-scroll overview mt-5 mx-3">
-      <img src="./images/fuji.jpg" width="100%" alt="富士山と河口湖畔の紅葉 © koichi_hayakawa">
+    <div class="mt-5 mx-3 text-left">
+      <!--<img src="./images/fuji.jpg" width="100%" alt="富士山と河口湖畔の紅葉 © koichi_hayakawa">
       <p class="text-xs mt-1 source">富士山と河口湖畔の紅葉 © koichi_hayakawa、<a
-          href="https://creativecommons.org/licenses/by/4.0/deed.ja" target="_blank">CC BY ４.0</a></p>
+          href="https://creativecommons.org/licenses/by/4.0/deed.ja" target="_blank">CC BY ４.0</a></p>-->
 
       <h3 class="text-2xl mt-5" id="manual_h3">和算の世界へようこそ！</h3>
 
@@ -356,13 +301,13 @@
   </div><!-- main -->
 
   <!-- 使い方 -->
-  <div id="manual"><span id="closed-btn2" class="py-2 px-3 text-xs">閉じる</span>
+  <div id="manual">
     <h3 class="text-2xl text-center"><i class="fa-solid fa-book-open"></i> 使い方</h3>
 
-    <div class="overflow-y-scroll overview mt-5 mx-3">
-      <img src="./images/inari.jpg" width="100%" alt="南宮稲荷神社 © SHori">
+    <div class="mt-5 mx-3 text-left">
+      <!--<img src="./images/inari.jpg" width="100%" alt="南宮稲荷神社 © SHori">
       <p class="text-xs mt-1 source">南宮稲荷神社 © SHori、<a href="https://creativecommons.org/licenses/by/4.0/deed.ja"
-          target="_blank">CC BY ４.0</a></p>
+          target="_blank">CC BY ４.0</a></p>-->
 
       <h3 class="text-2xl mt-5" id="manual_h3">和算の計算手法や算額を掲載</h3>
       <p class="mt-5">例えば、日本最古の九九表や、平方根の求め方、円周率の計算手法など、江戸時代に栄えた和算ならではの情報を掲載しています。</p>
@@ -386,16 +331,16 @@
 
   </div>
 
-  <div id="share" class="text-center"><span id="closed-btn3" class="py-2 px-3 text-xs">閉じる</span>
+  <div id="share" class="text-center">
     <h3 class="text-2xl text-center mb-3"><i class="fa-regular fa-comments"></i> シェア</h3>
-    <div class="mt-5 overview text-left px-3 overflow-y-scroll">
-      <img src="./images/ajisai.jpg" width="100%" alt="紫陽花 © yaaaaa">
+    <div class="mt-5 text-left px-3">
+      <!--<img src="./images/ajisai.jpg" width="100%" alt="紫陽花 © yaaaaa">
       <p class="text-xs mt-1 source">紫陽花 © yaaaaa、<a href="https://creativecommons.org/licenses/by/4.0/deed.ja"
-          target="_blank">CC BY ４.0</a></p>
+          target="_blank">CC BY ４.0</a></p>-->
 
       <h3 class="text-2xl my-5" id="manual_h3">アプリURL</h3>
 
-      <p class="mt-5">https://wasan-taste.netlify.app/</p>
+      <p class="mt-5">https://overseastravel17.netlify.app/</p>
 
       <h3 class="text-2xl mt-10 mb-5" id="manual_h3">二次元バーコード</h3>
 
@@ -405,6 +350,7 @@
 
   </div>
 
+  <!--
   <div id="search" class="text-center"><span id="closed-btn5" class="py-2 px-3 text-xs">閉じる</span>
     <h3 class="text-2xl text-center mb-3"><i class="fa-solid fa-search"></i> 検　索</h3>
 
@@ -417,18 +363,14 @@
 
     <div class="search_list1 overflow-y-scroll overview2 mt-5 mx-5"></div>
 
-  </div>
+  </div>-->
 
-  <!-- image popup -->
-  <div id="image-src"><span id="closed-btn4" class="py-2 px-3 text-xs">閉じる</span>
-
-    <div id="image-link" class="mt-10"></div>
-
-  </div>
+  </center>
+</div><!-- main -->
 
   <div class="sns-fb">
 
-    <div class="fb-share-button" data-href="https://wasan-taste.netlify.app/" data-layout="button_count"
+    <div class="fb-share-button" data-href="https://overseastravel17.netlify.app/" data-layout="button_count"
       data-size="small"></div>
 
   </div>
@@ -439,12 +381,7 @@
 
   <!-- フッター -->
   <div id="footer" class="footer p-2 text-center">
-    <div class="grid gap-4 grid-cols-3 grid-rows-1">
-      <div class="beginner-btn"><i class="fa-solid fa-user"></i> はじめに</div>
-      <div class="manual-btn"><i class="fa-solid fa-book-open"></i> 使い方</div>
-      <div class="search-btn"><i class="fa-solid fa-search"></i> シェア</div>
-    </div>
-    <p class="text-xs mt-1"><a href="https://github.com/linkevery2s/quest-and-answer" target="_blank">src on
+    <p class="text-xs"><a href="https://github.com/linkevery2s/quest-and-answer" target="_blank">src on
         GitHub</a>.
       <i class="fa-regular fa-copyright"></i> <a href="https://hitoshi2s.netlify.app/" target="_blank">齋藤 仁志</a>. <a
         href="https://docs.google.com/forms/d/e/1FAIpQLSf-WMoBJRTdA1bmN_SmQ-bsNGeLs1l737d3c9BUNuErjH-KBw/viewform"
@@ -489,14 +426,14 @@
       main.style.margin = "80px 0 0 0";
       main.style.padding = "0 0 70px 0";
       zoom2.style.display = "none";
-      page_top.style.bottom = "64px";
+      page_top.style.bottom = "37px";
       sns_fb.style.display = "block";
     });
 
     /* メニューポップアップ表示 */
     const beginner_btn = document.querySelector('.beginner-btn');
     const manual_btn = document.querySelector('.manual-btn');
-    const share_btn = document.querySelector('.share-btn');
+    const menu_btn = document.querySelector('.menu-btn');
     const search_btn = document.querySelector('.search-btn');
     const overlay = document.querySelector('#overlay');
 
@@ -510,7 +447,7 @@
       $('#manual').fadeIn();
     });
 
-    share_btn.addEventListener('click', () => {
+    menu_btn.addEventListener('click', () => {
       $('#overlay').fadeIn();
       $('#share').fadeIn();
     });
@@ -529,38 +466,7 @@
       $('#image-src').fadeOut();
     });
 
-    const closed_btn = document.querySelector("#closed-btn");
-    const closed_btn2 = document.querySelector("#closed-btn2");
-    const closed_btn3 = document.querySelector("#closed-btn3");
-    const closed_btn4 = document.querySelector("#closed-btn4");
-    const closed_btn5 = document.querySelector("#closed-btn5");
-
-    closed_btn.addEventListener('click', () => {
-      $('#overlay').fadeOut();
-      $('#beginner').fadeOut();
-    });
-
-    closed_btn2.addEventListener('click', () => {
-      $('#overlay').fadeOut();
-      $('#manual').fadeOut();
-    });
-
-    closed_btn3.addEventListener('click', () => {
-      $('#overlay').fadeOut();
-      $('#share').fadeOut();
-    });
-
-    closed_btn4.addEventListener('click', () => {
-      $('#overlay').fadeOut();
-      $('#image-src').fadeOut();
-    });
-
-    closed_btn5.addEventListener('click', () => {
-      $('#overlay').fadeOut();
-      $('#search').fadeOut();
-    });
-
-    /* 検索機能 */
+    /* 検索機能 
     const search_list1 = document.querySelector('.search_list1');
     const search_btn1 = document.querySelector('.search_btn');
     const reset_btn1 = document.querySelector('.reset_btn');
@@ -620,55 +526,7 @@
           '</div>';
       }
 
-    });
-
-    // 画像の拡大表示 
-    const image_link = document.querySelector("#image-link");
-    const literature = document.querySelector("#literature");
-
-    let image_src = () => {
-      $('#overlay').fadeIn();
-      $('#image-src').fadeIn();
-    };
-
-    window.korai = () => {
-
-      image_link.innerHTML = '<iframe src = "./aomoriiseki.html" width="100%" height="100%" border="0"></iframe>';
-
-      //literature.innerHTML = "<a href='https://cb.bunka.go.jp/ja' target='_blank'>文化財デジタルコンテンツ</a>、文化庁、<a href='https://creativecommons.org/licenses/by/4.0/deed.ja' target='_blank'>CC BY 4.0</a>";
-
-      image_src();
-
-    };
-
-    /*window.image = (x) => {
-
-      image_link.innerHTML = '<img src="./data/' + data[x].key + '.jpg" height="100%" class="image_border">';
-      image_src();
-
-    }*/
-
-    /*window.img_loader = (x, y) => {
-
-      console.log(x + y);
-
-      image_link.innerHTML = '<center><img src="./data/turukame' + x + '.jpg" class="image_border"></center>';
-
-      if (x == 1) {
-        literature.innerHTML = "『新編塵劫記 3巻』（国立国会図書館所蔵）「<a href='https://jpsearch.go.jp/item/dignl-3508170' target='_blank'>国立国会図書館デジタルコレクション</a>」を加工・編集して作成、<a href='https://creativecommons.org/publicdomain/mark/1.0/deed.ja' target='_blank'>PDM 1.0</a>"
-      }
-      else if (x == 2) {
-        literature.innerHTML = "現代語訳";
-      }
-      else { }
-
-      image_src();
-
-    };*/
-
-    window.below = (x) => {
-      $("#" + x).toggle(400);
-    };
+    });*/
 
     /* reload */
     const top = document.querySelector('#top');
