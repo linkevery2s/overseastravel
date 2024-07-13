@@ -90,6 +90,11 @@
       padding: 0 0 70px 0;
       z-index: 2;
       width: 100%;
+      max-width: 1000px;
+      left: 50%;
+      transform: translateX(-50%);
+      -webkit-transform: translateX(-50%);
+      -ms-transform: translateX(-50%);
     }
 
     #overlay {
@@ -103,17 +108,6 @@
       z-index: 10;
     }
 
-    #beginner,
-    #manual,
-    #post,
-    #data-source,
-    #share{
-      z-index: 11;
-      max-width: 800px;
-      left: 50%;
-
-    }
-
     .overview {
       height: 90%;
     }
@@ -124,7 +118,7 @@
     }
 
     #manual_h3 {
-      border-bottom: 3px dotted #a0d8ef;
+      border-bottom: 3px dotted rgba(230, 0, 51, .5);
       padding-bottom: 3px;
     }
 
@@ -267,54 +261,19 @@
       </ul>
     </div>
 
-    <center>
-  <!-- はじめに -->
-  <div id="beginner">
-    <h3 class="text-2xl text-center"><i class="fa-solid fa-user"></i> はじめに</h3>
 
-    <div class="mt-5 mx-3 text-left">
+
+    <div class="mt-5 mx-3">
       <!--<img src="./images/fuji.jpg" width="100%" alt="富士山と河口湖畔の紅葉 © koichi_hayakawa">
       <p class="text-xs mt-1 source">富士山と河口湖畔の紅葉 © koichi_hayakawa、<a
           href="https://creativecommons.org/licenses/by/4.0/deed.ja" target="_blank">CC BY ４.0</a></p>-->
 
-      <h3 class="text-2xl mt-5" id="manual_h3">和算の世界へようこそ！</h3>
+      <h3 class="text-2xl mt-5" id="manual_h3">はじめに</h3>
 
-      <p class="mt-5">和算を楽しんで学べるアプリが誕生しました。</p>
+      <p class="mt-5">アプリ解説</p>
 
-      <p class="mt-5">このアプリでは、江戸時代から伝わる日本独自の数学「和算」を手軽に学ぶことができます。</p>
+      <h3 class="text-2xl mt-5" id="manual_h3">インストール方法</h3>
 
-      <h3 class="text-2xl mt-5" id="manual_h3">アプリを開発したきっかけ</h3>
-
-      <p class="mt-5">2024年は僕のシビックテックの活動の中で、教育アプリを開発することを目標に開発していました。</p>
-
-      <p class="mt-5">国語のアプリを作ろう！と思っていました。</p>
-
-      <h3 class="text-2xl mt-5" id="manual_h3">主な特徴</h3>
-
-      <p class="mt-5">国立国会図書館などの文献を参考に、和算の計算方法や算額の問題、解法を掲載しています。</p>
-      <p class="mt-5">現代の解き方、和算の解き方を比べることができます。</p>
-      <p class="mt-5">生成AIがブームになっている現在、和算の問題がAIにも解けるかどうか、試行しました。</p>
-      <p class="mt-5">和算の魅力を再発見し、数学の新たな世界に触れてみませんか？</p>
-      <p class="mt-5 mb-7">齋藤　仁志. </p>
-    </div>
-
-  </div><!-- main -->
-
-  <!-- 使い方 -->
-  <div id="manual">
-    <h3 class="text-2xl text-center"><i class="fa-solid fa-book-open"></i> 使い方</h3>
-
-    <div class="mt-5 mx-3 text-left">
-      <!--<img src="./images/inari.jpg" width="100%" alt="南宮稲荷神社 © SHori">
-      <p class="text-xs mt-1 source">南宮稲荷神社 © SHori、<a href="https://creativecommons.org/licenses/by/4.0/deed.ja"
-          target="_blank">CC BY ４.0</a></p>-->
-
-      <h3 class="text-2xl mt-5" id="manual_h3">和算の計算手法や算額を掲載</h3>
-      <p class="mt-5">例えば、日本最古の九九表や、平方根の求め方、円周率の計算手法など、江戸時代に栄えた和算ならではの情報を掲載しています。</p>
-      <p class="mt-5">各コンテンツの画像をタップすると、拡大表示されます。</p>
-      <p class="mt-5">各々のコンテンツは独立しているので、ご自分の興味のある項目を調べてみてください。</p>
-
-      <h3 class="text-2xl mt-7" id="manual_h3">インストール方法</h3>
       <p class="mt-5">PWAに対応しているので、iPhone、Androidともに、WEBブラウザの「ホーム画面に追加」からインストールできます。</p>
       <img src="./images/install.jpg" width="100%" class="mt-5" alt="インストール方法の画像">
 
@@ -327,17 +286,6 @@
       <h3 class="text-2xl mt-7" id="manual_h3">全画面表示</h3>
       <p class="mt-5 mb-7">左上の全画面表示ボタンを押すと、ヘッダー、フッターが無くなり、全画面表示に切り替わります。</p>
 
-    </div>
-
-  </div>
-
-  <div id="share" class="text-center">
-    <h3 class="text-2xl text-center mb-3"><i class="fa-regular fa-comments"></i> シェア</h3>
-    <div class="mt-5 text-left px-3">
-      <!--<img src="./images/ajisai.jpg" width="100%" alt="紫陽花 © yaaaaa">
-      <p class="text-xs mt-1 source">紫陽花 © yaaaaa、<a href="https://creativecommons.org/licenses/by/4.0/deed.ja"
-          target="_blank">CC BY ４.0</a></p>-->
-
       <h3 class="text-2xl my-5" id="manual_h3">アプリURL</h3>
 
       <p class="mt-5">https://overseastravel17.netlify.app/</p>
@@ -347,8 +295,6 @@
       <img src="./images/qr.jpg" alt="二次元バーコード">
 
     </div>
-
-  </div>
 
   <!--
   <div id="search" class="text-center"><span id="closed-btn5" class="py-2 px-3 text-xs">閉じる</span>
@@ -365,8 +311,8 @@
 
   </div>-->
 
-  </center>
 </div><!-- main -->
+
 
   <div class="sns-fb">
 
