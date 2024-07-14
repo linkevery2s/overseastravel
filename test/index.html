@@ -36,18 +36,6 @@
   <script src="./jquery-1.11.3.min.js"></script>
   <script type="text/javascript" src="./jquery.cssmap.min.js"></script>
 
-  <script type="text/javascript">
-    $(document).ready(function () {
-
-      // CSSMap;
-      $("#map-continents").CSSMap({
-        "size": 1450
-      });
-      // END OF THE CSSMap;
-
-    });
-  </script>
-
   <style>
     html {
       width: 100%;
@@ -69,7 +57,7 @@
       position: fixed;
       top: 0;
       z-index: 5;
-      background: rgba(255,255,255,.7);
+      background: rgba(255, 255, 255, .7);
       color: #000000;
       border-bottom: 1px dotted #000000;
     }
@@ -176,7 +164,7 @@
       position: fixed;
       bottom: 0;
       z-index: 5;
-      background: rgba(255,255,255,.7);
+      background: rgba(255, 255, 255, .7);
       color: #000000;
       border-top: 1px dotted #000000;
     }
@@ -215,6 +203,108 @@
       border-right: 3px solid #ffffff;
       transform: translateY(20%) rotate(-45deg);
     }
+
+    .worldmap {
+      position: relative;
+    }
+
+    .worldmap .asia {
+      position: absolute;
+      top: 35%;
+      left: 38%;
+      -ms-transform: translate(-38%, -35%);
+      -webkit-transform: translate(-38%, -35%);
+      transform: translate(-38%, -35%);
+      color: #ffffff;
+      background: rgba(230, 0, 51, 1);
+      margin: 0 !important;
+      padding: .5em;
+      cursor: pointer;
+    }
+
+    .worldmap .australia {
+      position: absolute;
+      top: 75%;
+      left: 45%;
+      -ms-transform: translate(-45%, -75%);
+      -webkit-transform: translate(-45%, -75%);
+      transform: translate(-45%, -75%);
+      color: #ffffff;
+      background: rgba(230, 0, 51, 1);
+      margin: 0 !important;
+      padding: .5em;
+      cursor: pointer;
+    }
+
+    .worldmap .africa {
+      position: absolute;
+      top: 50%;
+      left: 5%;
+      -ms-transform: translate(-5%, -50%);
+      -webkit-transform: translate(-5%, -50%);
+      transform: translate(-5%, -50%);
+      color: #ffffff;
+      background: rgba(230, 0, 51, 1);
+      margin: 0 !important;
+      padding: .5em;
+      cursor: pointer;
+    }
+
+    .worldmap .europe {
+      position: absolute;
+      top: 5%;
+      left: 5%;
+      -ms-transform: translate(-5%, -5%);
+      -webkit-transform: translate(-5%, -5%);
+      transform: translate(-5%, -5%);
+      color: #ffffff;
+      background: rgba(230, 0, 51, 1);
+      margin: 0 !important;
+      padding: .5em;
+      cursor: pointer;
+    }
+
+    .worldmap .n_america {
+      position: absolute;
+      top: 25%;
+      right: 15%;
+      -ms-transform: translate(-15%, -25%);
+      -webkit-transform: translate(-15%, -25%);
+      transform: translate(-15%, -25%);
+      color: #ffffff;
+      background: rgba(230, 0, 51, 1);
+      margin: 0 !important;
+      padding: .5em;
+      cursor: pointer;
+    }
+
+    .worldmap .s_america {
+      position: absolute;
+      top: 70%;
+      right: 5%;
+      -ms-transform: translate(-5%, -70%);
+      -webkit-transform: translate(-5%, -70%);
+      transform: translate(-5%, -70%);
+      color: #ffffff;
+      background: rgba(230, 0, 51, 1);
+      margin: 0 !important;
+      padding: .5em;
+      cursor: pointer;
+    }
+
+    .worldmap .m_east {
+      position: absolute;
+      top: 30%;
+      left: 22%;
+      -ms-transform: translate(-22%, -30%);
+      -webkit-transform: translate(-22%, -30%);
+      transform: translate(-22%, -30%);
+      color: #ffffff;
+      background: rgba(230, 0, 51, 1);
+      margin: 0 !important;
+      padding: .5em;
+      cursor: pointer;
+    }
   </style>
 
   <link rel="manifest" href="./manifest.json">
@@ -250,7 +340,7 @@
 
   <div class="main">
 
-    <div id="map-continents">
+    <!--<div id="map-continents">
       <ul class="continents">
         <li class="c1"><a href="javascript:void(0);">アフリカ</a></li>
         <li class="c2"><a href="javascript:void(0);">アジア</a></li>
@@ -259,14 +349,23 @@
         <li class="c5"><a href="javascript:void(0);">北米</a></li>
         <li class="c6"><a href="javascript:void(0);">中南米</a></li>
       </ul>
+    </div>-->
+
+    <div class="worldmap">
+      <img src="./images/worldmap.jpg" width="100%">
+      <p class="asia text-xs md:text-lg">アジア</p>
+      <p class="australia text-xs md:text-lg">豪州</p>
+      <p class="africa text-xs md:text-lg">アフリカ</p>
+      <p class="europe text-xs md:text-lg">ヨーロッパ</p>
+      <p class="n_america text-xs md:text-lg">北米</p>
+      <p class="s_america text-xs md:text-lg">中南米</p>
+      <p class="m_east text-xs md:text-lg">中東</p>
+
     </div>
 
-
+    <div class="result mx-3"></div>
 
     <div class="mt-5 mx-3">
-      <!--<img src="./images/fuji.jpg" width="100%" alt="富士山と河口湖畔の紅葉 © koichi_hayakawa">
-      <p class="text-xs mt-1 source">富士山と河口湖畔の紅葉 © koichi_hayakawa、<a
-          href="https://creativecommons.org/licenses/by/4.0/deed.ja" target="_blank">CC BY ４.0</a></p>-->
 
       <h3 class="text-2xl mt-5" id="manual_h3">はじめに</h3>
 
@@ -296,7 +395,7 @@
 
     </div>
 
-  <!--
+    <!--
   <div id="search" class="text-center"><span id="closed-btn5" class="py-2 px-3 text-xs">閉じる</span>
     <h3 class="text-2xl text-center mb-3"><i class="fa-solid fa-search"></i> 検　索</h3>
 
@@ -311,7 +410,7 @@
 
   </div>-->
 
-</div><!-- main -->
+  </div><!-- main -->
 
 
   <div class="sns-fb">
@@ -337,6 +436,19 @@
   </div>
 
   <script type="module">
+
+    /*$(document).ready(function () {
+
+      $("#map-continents").CSSMap({
+        "size": 1450,
+        "onClick": (e) =>{
+          const area_name = e[0].childNodes[1].innerHTML;
+
+          console.log(area_name);
+        }
+      });
+
+    });*/
 
     const topButton = document.querySelector(".pagetop");
 
@@ -376,18 +488,57 @@
       sns_fb.style.display = "block";
     });
 
-    const africa = document.querySelector(".c1");
+    const asia = document.querySelector(".asia");
+    const australia = document.querySelector(".australia");
+    const africa = document.querySelector(".africa");
+    const europe = document.querySelector(".europe");
+    const n_america = document.querySelector(".n_america");
+    const s_america = document.querySelector(".s_america");
+    const m_east = document.querySelector(".m_east");
 
-    africa.addEventListener('click', () => {
-      console.log("アフリカ");
+    const result = document.querySelector(".result");
+
+    asia.addEventListener("click", () => {
+
+      result.innerHTML = "アジア";
 
     });
 
-    window.test = (x) =>{
+    australia.addEventListener("click", () => {
 
-      console.log(x);
-    };
+      result.innerHTML = "豪州";
 
+    });
+
+    africa.addEventListener("click", () => {
+
+      result.innerHTML = "アフリカ";
+
+    });
+
+    europe.addEventListener("click", () => {
+
+      result.innerHTML = "ヨーロッパ";
+
+    });
+
+    n_america.addEventListener("click", () => {
+
+      result.innerHTML = "北アメリカ";
+
+    });
+
+    s_america.addEventListener("click", () => {
+
+      result.innerHTML = "南アメリカ";
+
+    });
+
+    m_east.addEventListener("click", () => {
+
+      result.innerHTML = "中東";
+
+    });
 
     /* メニューポップアップ表示
     const beginner_btn = document.querySelector('.beginner-btn');
