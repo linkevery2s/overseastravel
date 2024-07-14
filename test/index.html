@@ -252,12 +252,12 @@
 
     <div id="map-continents">
       <ul class="continents">
-        <li class="c1"><a href="index.html">アフリカ</a></li>
-        <li class="c2"><a href="index.html">アジア</a></li>
-        <li class="c3"><a href="index.html">豪州</a></li>
-        <li class="c4"><a href="index.html">ヨーロッパ</a></li>
-        <li class="c5"><a href="index.html">北米</a></li>
-        <li class="c6"><a href="index.html">中南米</a></li>
+        <li class="c1"><a href="javascript:void(0);">アフリカ</a></li>
+        <li class="c2"><a href="javascript:void(0);">アジア</a></li>
+        <li class="c3"><a href="javascript:void(0);">豪州</a></li>
+        <li class="c4"><a href="javascript:void(0);">ヨーロッパ</a></li>
+        <li class="c5"><a href="javascript:void(0);">北米</a></li>
+        <li class="c6"><a href="javascript:void(0);">中南米</a></li>
       </ul>
     </div>
 
@@ -376,7 +376,20 @@
       sns_fb.style.display = "block";
     });
 
-    /* メニューポップアップ表示 */
+    const africa = document.querySelector(".c1");
+
+    africa.addEventListener('click', () => {
+      console.log("アフリカ");
+
+    });
+
+    window.test = (x) =>{
+
+      console.log(x);
+    };
+
+
+    /* メニューポップアップ表示
     const beginner_btn = document.querySelector('.beginner-btn');
     const manual_btn = document.querySelector('.manual-btn');
     const menu_btn = document.querySelector('.menu-btn');
