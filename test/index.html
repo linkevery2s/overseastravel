@@ -30,11 +30,7 @@
     integrity="sha512-GWzVrcGlo0TxTRvz9ttioyYJ+Wwk9Ck0G81D+eO63BaqHaJ3YZX9wuqjwgfcV/MrB2PhaVX9DkYVhbFpStnqpQ=="
     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-  <!--CSSMAP-->
-  <link rel="stylesheet" type="text/css" href="cssmap-continents/cssmap-continents.css" media="screen" />
-
   <script src="./jquery-1.11.3.min.js"></script>
-  <script type="text/javascript" src="./jquery.cssmap.min.js"></script>
 
   <style>
     html {
@@ -70,6 +66,10 @@
       z-index: 1;
       cursor: pointer;
       background: rgba(255, 255, 255, .7);
+    }
+
+    .update {
+      color: #95949a;
     }
 
     .main {
@@ -146,7 +146,7 @@
       border-radius: .3em;
     }
 
-    .menu-btn {
+    .update-btn {
       position: fixed;
       top: 10px;
       right: 10px;
@@ -156,7 +156,7 @@
       font-size: 1rem;
       cursor: pointer;
       line-height: 1.2;
-      border-radius: .3em;
+      border-radius: 100%;
     }
 
     .footer {
@@ -216,7 +216,7 @@
       -webkit-transform: translate(-38%, -35%);
       transform: translate(-38%, -35%);
       color: #ffffff;
-      background: rgba(230, 0, 51, 1);
+      background: rgba(230, 0, 51, .8);
       margin: 0 !important;
       padding: .5em;
       cursor: pointer;
@@ -230,7 +230,7 @@
       -webkit-transform: translate(-45%, -75%);
       transform: translate(-45%, -75%);
       color: #ffffff;
-      background: rgba(230, 0, 51, 1);
+      background: rgba(230, 0, 51, .8);
       margin: 0 !important;
       padding: .5em;
       cursor: pointer;
@@ -244,7 +244,7 @@
       -webkit-transform: translate(-5%, -50%);
       transform: translate(-5%, -50%);
       color: #ffffff;
-      background: rgba(230, 0, 51, 1);
+      background: rgba(230, 0, 51, .8);
       margin: 0 !important;
       padding: .5em;
       cursor: pointer;
@@ -252,13 +252,13 @@
 
     .worldmap .europe {
       position: absolute;
-      top: 5%;
+      top: 10%;
       left: 5%;
-      -ms-transform: translate(-5%, -5%);
-      -webkit-transform: translate(-5%, -5%);
-      transform: translate(-5%, -5%);
+      -ms-transform: translate(-5%, -10%);
+      -webkit-transform: translate(-5%, -10%);
+      transform: translate(-5%, -10%);
       color: #ffffff;
-      background: rgba(230, 0, 51, 1);
+      background: rgba(230, 0, 51, .8);
       margin: 0 !important;
       padding: .5em;
       cursor: pointer;
@@ -272,7 +272,7 @@
       -webkit-transform: translate(-15%, -25%);
       transform: translate(-15%, -25%);
       color: #ffffff;
-      background: rgba(230, 0, 51, 1);
+      background: rgba(230, 0, 51, .8);
       margin: 0 !important;
       padding: .5em;
       cursor: pointer;
@@ -286,7 +286,7 @@
       -webkit-transform: translate(-5%, -70%);
       transform: translate(-5%, -70%);
       color: #ffffff;
-      background: rgba(230, 0, 51, 1);
+      background: rgba(230, 0, 51, .8);
       margin: 0 !important;
       padding: .5em;
       cursor: pointer;
@@ -300,7 +300,7 @@
       -webkit-transform: translate(-22%, -30%);
       transform: translate(-22%, -30%);
       color: #ffffff;
-      background: rgba(230, 0, 51, 1);
+      background: rgba(230, 0, 51, .8);
       margin: 0 !important;
       padding: .5em;
       cursor: pointer;
@@ -329,7 +329,7 @@
       1.0</div>-->
 
     <div class="zoom-btn"><i class="fa-solid fa-xl fa-expand"></i></div>
-    <div class="menu-btn"><i class="fa-solid fa-xl fa-bars"></i></div>
+    <div class="update-btn"><i class="fa-solid fa-xl fa-arrow-rotate-left"></i></div>
 
   </div>
 
@@ -339,17 +339,6 @@
   <div id="overlay"></div>
 
   <div class="main">
-
-    <!--<div id="map-continents">
-      <ul class="continents">
-        <li class="c1"><a href="javascript:void(0);">アフリカ</a></li>
-        <li class="c2"><a href="javascript:void(0);">アジア</a></li>
-        <li class="c3"><a href="javascript:void(0);">豪州</a></li>
-        <li class="c4"><a href="javascript:void(0);">ヨーロッパ</a></li>
-        <li class="c5"><a href="javascript:void(0);">北米</a></li>
-        <li class="c6"><a href="javascript:void(0);">中南米</a></li>
-      </ul>
-    </div>-->
 
     <div class="worldmap">
       <img src="./images/worldmap.jpg" width="100%">
@@ -363,6 +352,7 @@
 
     </div>
 
+    <p class="update mx-3 text-xs text-right"></p>
     <div class="result mx-3"></div>
 
     <div class="mt-5 mx-3">
@@ -376,11 +366,8 @@
       <p class="mt-5">PWAに対応しているので、iPhone、Androidともに、WEBブラウザの「ホーム画面に追加」からインストールできます。</p>
       <img src="./images/install.jpg" width="100%" class="mt-5" alt="インストール方法の画像">
 
-      <h3 class="text-2xl mt-7" id="manual_h3">解説ボタン</h3>
-      <p class="mt-5">各コンテンツの解説ボタンを押すと、解法が表示されます。</p>
-
-      <h3 class="text-2xl mt-7" id="manual_h3">検索ボタン</h3>
-      <p class="mt-5">右下の検索ボタンより、各コンテンツのキーワードが検索ができます。</p>
+      <h3 class="text-2xl mt-7" id="manual_h3">更新ボタン</h3>
+      <p class="mt-5">右上の更新ボタンを押すと、データ取得が更新されます。</p>
 
       <h3 class="text-2xl mt-7" id="manual_h3">全画面表示</h3>
       <p class="mt-5 mb-7">左上の全画面表示ボタンを押すと、ヘッダー、フッターが無くなり、全画面表示に切り替わります。</p>
@@ -437,19 +424,6 @@
 
   <script type="module">
 
-    /*$(document).ready(function () {
-
-      $("#map-continents").CSSMap({
-        "size": 1450,
-        "onClick": (e) =>{
-          const area_name = e[0].childNodes[1].innerHTML;
-
-          console.log(area_name);
-        }
-      });
-
-    });*/
-
     const topButton = document.querySelector(".pagetop");
 
     topButton.addEventListener("click", () => {
@@ -497,46 +471,55 @@
     const m_east = document.querySelector(".m_east");
 
     const result = document.querySelector(".result");
+    const update = document.querySelector(".update");
+
+    let d = new Date();
+
+    console.log(d);
+
+    update.innerHTML = "データ取得日時：" +d.getFullYear() + '/' + ('0' + (d.getMonth() + 1)).slice(-2) + '/' +('0' + d.getDate()).slice(-2) + ' ' +  ('0' + d.getHours()).slice(-2) + ':' + ('0' + d.getMinutes()).slice(-2);
+
+    result.innerHTML = "<iframe src = './timeline.html' width='100%' height='450px' border='0'></iframe>";
 
     asia.addEventListener("click", () => {
 
-      result.innerHTML = "アジア";
+      result.innerHTML = "<iframe src = './timeline.html' width='100%' height='450px' border='0'></iframe>";
 
     });
 
     australia.addEventListener("click", () => {
 
-      result.innerHTML = "豪州";
+      result.innerHTML = "<iframe src = './timeline.html' width='100%' height='450px' border='0'></iframe>";
 
     });
 
     africa.addEventListener("click", () => {
 
-      result.innerHTML = "アフリカ";
+      result.innerHTML = "<iframe src = './timeline.html' width='100%' height='450px' border='0'></iframe>";
 
     });
 
     europe.addEventListener("click", () => {
 
-      result.innerHTML = "ヨーロッパ";
+      result.innerHTML = "<iframe src = './timeline.html' width='100%' height='450px' border='0'></iframe>";
 
     });
 
     n_america.addEventListener("click", () => {
 
-      result.innerHTML = "北アメリカ";
+      result.innerHTML = "<iframe src = './timeline.html' width='100%' height='450px' border='0'></iframe>";
 
     });
 
     s_america.addEventListener("click", () => {
 
-      result.innerHTML = "南アメリカ";
+      result.innerHTML = "<iframe src = './timeline.html' width='100%' height='450px' border='0'></iframe>";
 
     });
 
     m_east.addEventListener("click", () => {
 
-      result.innerHTML = "中東";
+      result.innerHTML = "<iframe src = './timeline.html' width='100%' height='450px' border='0'></iframe>";
 
     });
 
@@ -639,7 +622,7 @@
     });*/
 
     /* reload */
-    const top = document.querySelector('#top');
+    const update_btn = document.querySelector('.update-btn');
 
     top.addEventListener('click', () => {
 

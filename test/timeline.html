@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html lang="ja">
+<title>海外安全情報データベース</title>
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+  <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" >
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    html,
+    body {
+      padding: 0;
+      margin: 0;
+      width: 100%;
+    }
+
+    body{
+      font-family: "Meiryo","Hiragino Maru Gothic Pro",sans-serif;
+    }
+
+    ul {
+      padding: 0;
+      margin: 0;
+    }
+
+    li {
+      width: 100%;
+      margin: 0;
+      padding: 0
+      text-align: left;
+      list-style: none;
+      word-break: break-all;
+    }
+
+    li:nth-child(even) {
+      background: rgba(242,242,242,0.7);
+    }
+
+
+
+  </style>
+
+  <script type="module">
+    onload = async () => {
+
+      const parser = new DOMParser();
+
+      const res = await fetch('https://www.ezairyu.mofa.go.jp/opendata/area/newarrivalA.xml');
+
+      const data = await res.text();
+
+      const txt = await parser.parseFromString(data, "text/xml");
+
+      const doc = txt.querySelectorAll("mail");
+
+      const arr = Array.from(doc);
+
+      console.log(arr[0].querySelector("country").querySelector("name").textContent);
+
+      for (let i = 0; i < arr.length; i++) {
+
+        info.innerHTML += "<li class ='p-5'><div class='text-lg'>" + arr[i].querySelector("country").querySelector("name").textContent + "</div>" + arr[i].querySelector("title").textContent + "<br>" + arr[i].querySelector("lead").textContent.replaceAll("●", "") + "</li>";
+
+      }
+
+    }
+  </script>
+</head>
+
+<body>
+
+    <ul>
+      <div id="info"></div>
+    </ul>
+
+</body>
+
+</html>
