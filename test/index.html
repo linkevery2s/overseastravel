@@ -187,7 +187,7 @@
       position: fixed;
       right: 3px;
       bottom: 37px;
-      background: rgba(230, 0, 51, 1);
+      background: rgba(230, 0, 51, .8);
       border-radius: 50%;
       display: flex;
       justify-content: center;
@@ -380,6 +380,10 @@
 
       <img src="./images/qr.jpg" alt="二次元バーコード">
 
+      <h3 class="text-2xl mt-5" id="manual_h3">使用したオープンデータ</h3>
+
+      <p class="mt-5">データ名称</p>
+
     </div>
 
     <!--
@@ -437,7 +441,6 @@
     const zoom = document.querySelector('.zoom-btn');
     const zoom2 = document.querySelector('.zoom-btn2');
     const main = document.querySelector('.main');
-    const page_top = document.querySelector('.pagetop');
     const sns_fb = document.querySelector('.sns-fb');
 
     zoom.addEventListener('click', () => {
@@ -447,7 +450,7 @@
       main.style.margin = "10px 0 0 0";
       main.style.padding = "0";
       zoom2.style.display = "block";
-      page_top.style.bottom = "4px";
+      topButton.style.bottom = "4px";
       sns_fb.style.display = "none";
     });
 
@@ -458,7 +461,7 @@
       main.style.margin = "80px 0 0 0";
       main.style.padding = "0 0 70px 0";
       zoom2.style.display = "none";
-      page_top.style.bottom = "37px";
+      topButton.style.bottom = "37px";
       sns_fb.style.display = "block";
     });
 
@@ -483,43 +486,43 @@
 
     asia.addEventListener("click", () => {
 
-      result.innerHTML = "<iframe src = './timeline.html' width='100%' height='450px' border='0'></iframe>";
+      result.innerHTML = "<iframe src = './timeline.html#10' width='100%' height='450px' border='0'></iframe>";
 
     });
 
     australia.addEventListener("click", () => {
 
-      result.innerHTML = "<iframe src = './timeline.html' width='100%' height='450px' border='0'></iframe>";
+      result.innerHTML = "<iframe src = './timeline.html#20' width='100%' height='450px' border='0'></iframe>";
 
     });
 
     africa.addEventListener("click", () => {
 
-      result.innerHTML = "<iframe src = './timeline.html' width='100%' height='450px' border='0'></iframe>";
+      result.innerHTML = "<iframe src = './timeline.html#60' width='100%' height='450px' border='0'></iframe>";
 
     });
 
     europe.addEventListener("click", () => {
 
-      result.innerHTML = "<iframe src = './timeline.html' width='100%' height='450px' border='0'></iframe>";
+      result.innerHTML = "<iframe src = './timeline.html#42' width='100%' height='450px' border='0'></iframe>";
 
     });
 
     n_america.addEventListener("click", () => {
 
-      result.innerHTML = "<iframe src = './timeline.html' width='100%' height='450px' border='0'></iframe>";
+      result.innerHTML = "<iframe src = './timeline.html#30' width='100%' height='450px' border='0'></iframe>";
 
     });
 
     s_america.addEventListener("click", () => {
 
-      result.innerHTML = "<iframe src = './timeline.html' width='100%' height='450px' border='0'></iframe>";
+      result.innerHTML = "<iframe src = './timeline.html#33' width='100%' height='450px' border='0'></iframe>";
 
     });
 
     m_east.addEventListener("click", () => {
 
-      result.innerHTML = "<iframe src = './timeline.html' width='100%' height='450px' border='0'></iframe>";
+      result.innerHTML = "<iframe src = './timeline.html#50' width='100%' height='450px' border='0'></iframe>";
 
     });
 
