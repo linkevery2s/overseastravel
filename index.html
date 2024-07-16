@@ -533,7 +533,7 @@
 
     /* 直近１年以内 */
     const parser2 = new DOMParser();
-    const res2 = await fetch('https://www.ezairyu.mofa.go.jp/opendata/area/00L.xml');
+    const res2 = await fetch('https://www.ezairyu.mofa.go.jp/opendata/area/00A.xml');
     const data2 = await res2.text();
     const txt2 = await parser2.parseFromString(data2, "text/xml");
     const doc2 = txt2.querySelectorAll("mail");
@@ -577,7 +577,7 @@
 
           if (arr2[i].querySelector("area").querySelector("cd").textContent == x) {
 
-            result2.innerHTML += "<li class ='p-5'><div class='text-lg'>" + arr2[i].querySelector("country").querySelector("cd").textContent + "</div>" + arr2[i].querySelector("title").textContent + "<br>" + arr2[i].querySelector("lead").textContent + "</li>";
+            result2.innerHTML += "<li class ='p-5'><div class='text-lg'>" + arr2[i].querySelector("country").querySelector("name").textContent + "</div>" + arr2[i].querySelector("title").textContent + "<br>" + arr2[i].querySelector("lead").textContent + "</li>";
 
           } else { }
         }
