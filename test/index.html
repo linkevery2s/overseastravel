@@ -1,0 +1,717 @@
+<!DOCTYPE HTML>
+<html lang="ja">
+<title>世界情勢マップ</title>
+
+<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# article: http://ogp.me/ns/article#">
+  <meta charset="UTF-8" name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta property="og:title" content="世界情勢マップ" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://overseastravel17.netlify.app/images/ogp.png" />
+  <meta name="description" content="海外の情勢（治安、災害、デモなど）がどうなっているのか、外務省の海外安全情報オープンデータを用いて開発しました。" />
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="世界情勢マップ" />
+  <meta name="twitter:image" content="https://overseastravel17.netlify.app/images/ogp.png" />
+  <meta name="author" content="Saito Hitoshi">
+  <meta name="keywords" content="世界情勢,治安,海外,海外安全情報,外務省" />
+  <link rel="apple-touch-icon" href="./images/apple-touch-icon.jpg">
+  <link rel="icon" href="./images/apple-touch-icon.jpg">
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js"
+    integrity="sha512-GWzVrcGlo0TxTRvz9ttioyYJ+Wwk9Ck0G81D+eO63BaqHaJ3YZX9wuqjwgfcV/MrB2PhaVX9DkYVhbFpStnqpQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <script src="./jquery-1.11.3.min.js"></script>
+
+  <style>
+    html {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      width: 100%;
+      height: 100%;
+      padding: 0;
+      margin: 0;
+      font-family: "Meiryo", "Hiragino Maru Gothic Pro", sans-serif;
+    }
+
+    .header {
+      width: 100%;
+      position: fixed;
+      top: 0;
+      z-index: 5;
+      background: rgba(255, 255, 255, .7);
+      color: #000000;
+      border-bottom: 1px dotted #000000;
+    }
+
+    .last_update {
+      position: fixed;
+      color: #000000;
+      top: 60px;
+      right: 3px;
+      z-index: 1;
+      cursor: pointer;
+      background: rgba(255, 255, 255, .7);
+    }
+
+    .update {
+      color: #95949a;
+    }
+
+    .main {
+      position: absolute;
+      margin: 80px 0 0 0;
+      padding: 0 0 70px 0;
+      z-index: 2;
+      width: 100%;
+      max-width: 1000px;
+      left: 50%;
+      transform: translateX(-50%);
+      -webkit-transform: translateX(-50%);
+      -ms-transform: translateX(-50%);
+    }
+
+    .result{
+      height: 400px;
+      overflow-y: scroll;
+    }
+
+    #overlay {
+      width: 100%;
+      height: 120vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background: rgba(0, 0, 0, .8);
+      display: none;
+      z-index: 10;
+    }
+
+    .result {
+      height: 400px;
+      overflow-y: scroll;
+    }
+
+    #manual_h3 {
+      border-bottom: 3px dotted rgba(230, 0, 51, .5);
+      padding-bottom: 3px;
+    }
+
+    .beginner-btn,
+    .manual-btn,
+    .share-btn,
+    .zoom-btn,
+    .search-btn {
+      cursor: pointer;
+    }
+
+    .zoom-btn {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      border: 1px solid #000000;
+      background: transparent;
+      padding: .5rem;
+      font-size: 1rem;
+      cursor: pointer;
+      line-height: 1.2;
+      border-radius: .3em;
+    }
+
+    .zoom-btn2 {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      background: rgba(0, 0, 0, .5);
+      display: none;
+      color: #ffffff;
+      z-index: 5;
+      padding: .5rem;
+      font-size: 1rem;
+      cursor: pointer;
+      line-height: 1.2;
+      border-radius: .3em;
+    }
+
+    .update-btn {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      border: 1px solid #000000;
+      background: transparent;
+      padding: .5rem;
+      font-size: 1rem;
+      cursor: pointer;
+      line-height: 1.2;
+      border-radius: 100%;
+    }
+
+    .footer {
+      width: 100%;
+      position: fixed;
+      bottom: 0;
+      z-index: 5;
+      background: rgba(255, 255, 255, .7);
+      color: #000000;
+      border-top: 1px dotted #000000;
+    }
+
+    a {
+      border-bottom: 1px dotted #000000;
+      padding-bottom: 1px;
+    }
+
+    .sns-fb {
+      position: fixed;
+      left: 3px;
+      bottom: 37px;
+      z-index: 5;
+    }
+
+    .pagetop {
+      height: 40px;
+      width: 40px;
+      position: fixed;
+      right: 3px;
+      bottom: 37px;
+      background: rgba(230, 0, 51, .8);
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 5;
+      cursor: pointer;
+    }
+
+    .pagetop_arrow {
+      height: 10px;
+      width: 10px;
+      border-top: 3px solid #ffffff;
+      border-right: 3px solid #ffffff;
+      transform: translateY(20%) rotate(-45deg);
+    }
+
+    .worldmap {
+      position: relative;
+    }
+
+    .worldmap .asia {
+      position: absolute;
+      top: 35%;
+      left: 38%;
+      -ms-transform: translate(-38%, -35%);
+      -webkit-transform: translate(-38%, -35%);
+      transform: translate(-38%, -35%);
+      color: #ffffff;
+      background: rgba(230, 0, 51, .8);
+      margin: 0 !important;
+      padding: .5em;
+      cursor: pointer;
+    }
+
+    .worldmap .australia {
+      position: absolute;
+      top: 75%;
+      left: 45%;
+      -ms-transform: translate(-45%, -75%);
+      -webkit-transform: translate(-45%, -75%);
+      transform: translate(-45%, -75%);
+      color: #ffffff;
+      background: rgba(230, 0, 51, .8);
+      margin: 0 !important;
+      padding: .5em;
+      cursor: pointer;
+    }
+
+    .worldmap .africa {
+      position: absolute;
+      top: 50%;
+      left: 5%;
+      -ms-transform: translate(-5%, -50%);
+      -webkit-transform: translate(-5%, -50%);
+      transform: translate(-5%, -50%);
+      color: #ffffff;
+      background: rgba(230, 0, 51, .8);
+      margin: 0 !important;
+      padding: .5em;
+      cursor: pointer;
+    }
+
+    .worldmap .europe {
+      position: absolute;
+      top: 10%;
+      left: 5%;
+      -ms-transform: translate(-5%, -10%);
+      -webkit-transform: translate(-5%, -10%);
+      transform: translate(-5%, -10%);
+      color: #ffffff;
+      background: rgba(230, 0, 51, .8);
+      margin: 0 !important;
+      padding: .5em;
+      cursor: pointer;
+    }
+
+    .worldmap .n_america {
+      position: absolute;
+      top: 25%;
+      right: 15%;
+      -ms-transform: translate(-15%, -25%);
+      -webkit-transform: translate(-15%, -25%);
+      transform: translate(-15%, -25%);
+      color: #ffffff;
+      background: rgba(230, 0, 51, .8);
+      margin: 0 !important;
+      padding: .5em;
+      cursor: pointer;
+    }
+
+    .worldmap .s_america {
+      position: absolute;
+      top: 70%;
+      right: 5%;
+      -ms-transform: translate(-5%, -70%);
+      -webkit-transform: translate(-5%, -70%);
+      transform: translate(-5%, -70%);
+      color: #ffffff;
+      background: rgba(230, 0, 51, .8);
+      margin: 0 !important;
+      padding: .5em;
+      cursor: pointer;
+    }
+
+    .worldmap .m_east {
+      position: absolute;
+      top: 30%;
+      left: 22%;
+      -ms-transform: translate(-22%, -30%);
+      -webkit-transform: translate(-22%, -30%);
+      transform: translate(-22%, -30%);
+      color: #ffffff;
+      background: rgba(230, 0, 51, .8);
+      margin: 0 !important;
+      padding: .5em;
+      cursor: pointer;
+    }
+
+    ul {
+      padding: 0;
+      margin: 0;
+    }
+
+    li {
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      text-align: left;
+      list-style: none;
+      word-break: break-all;
+    }
+
+    li:nth-child(odd) {
+      background: rgba(242, 242, 242, 0.7);
+    }
+  </style>
+
+  <link rel="manifest" href="./manifest.json">
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./service-worker.js').then(function () {
+        console.log('Service Worker Registered');
+      });
+    }
+  </script>
+
+</head>
+
+<body>
+
+  <div class="header p-3" id="header">
+    <center>
+      <h1 class="text-3xl" id="top">世界情勢マップ</h1>
+    </center>
+
+    <!--<div class="last_update text-xs px-1"><time datetime="2024-06-11" itemprop="modified">最終更新日：2024.06.11</time> ver
+      1.0</div>-->
+
+    <div class="zoom-btn"><i class="fa-solid fa-xl fa-expand"></i></div>
+    <div class="update-btn"><i class="fa-solid fa-xl fa-arrow-rotate-left"></i></div>
+
+  </div>
+
+  <div class="zoom-btn2"><i class="fa-solid fa-xl fa-expand"></i></div>
+
+  <!-- ポップアップ用のoverlay -->
+  <div id="overlay"></div>
+
+  <div class="main">
+
+    <div class="worldmap">
+      <img src="./images/worldmap.jpg" width="100%">
+      <p class="asia text-xs md:text-lg" onclick="show(10);">アジア</p>
+      <p class="australia text-xs md:text-lg" onclick="show(20);">豪州</p>
+      <p class="africa text-xs md:text-lg" onclick="show(60);">アフリカ</p>
+      <p class="europe text-xs md:text-lg" onclick="show(42);">ヨーロッパ</p>
+      <p class="n_america text-xs md:text-lg" onclick="show(30);">北米</p>
+      <p class="s_america text-xs md:text-lg" onclick="show(33);">中南米</p>
+      <p class="m_east text-xs md:text-lg" onclick="show(50);">中東</p>
+
+    </div>
+
+    <p class="update mx-3 text-xs text-right"></p>
+
+    <div class="result mt-3 mx-3"></div>
+
+    <div class="mt-5 mx-3">
+
+      <h3 class="text-2xl mb-5" id="manual_h3"><i class="fa-solid fa-plane"></i> はじめに</h3>
+
+      <p class="mt-5">アプリ解説</p>
+
+      <h3 class="text-2xl mt-10 mb-5" id="manual_h3"><i class="fa-solid fa-plane"></i> インストール方法</h3>
+
+      <p class="mt-5">PWAに対応しているので、iPhone、Androidともに、WEBブラウザの「ホーム画面に追加」からインストールできます。</p>
+      <img src="./images/install.jpg" width="100%" class="mt-5" alt="インストール方法の画像">
+
+      <h3 class="text-2xl mt-5 mb-5" id="manual_h3"><i class="fa-solid fa-plane"></i> 更新ボタン</h3>
+      <p class="mt-5">右上の更新ボタンを押すと、データ取得が更新されます。</p>
+
+      <h3 class="text-2xl mt-10 mb-5" id="manual_h3"><i class="fa-solid fa-plane"></i> 全画面表示</h3>
+      <p class="mt-5">左上の全画面表示ボタンを押すと、ヘッダー、フッターが無くなり、全画面表示に切り替わります。</p>
+
+      <h3 class="text-2xl mt-10 mb-5" id="manual_h3"><i class="fa-solid fa-plane"></i> アプリURL</h3>
+
+      <p class="mt-5">https://overseastravel17.netlify.app/</p>
+
+      <h3 class="text-2xl mt-10 mb-5" id="manual_h3"><i class="fa-solid fa-plane"></i> 二次元バーコード</h3>
+
+      <img src="./images/qr.jpg" alt="二次元バーコード">
+
+      <h3 class="text-2xl mt-10 mb-5" id="manual_h3"><i class="fa-solid fa-plane"></i> 使用したオープンデータ</h3>
+
+      <p class="mt-5">外務省 <a href="https://www.ezairyu.mofa.go.jp/html/opendata/index.html"
+          target="_blank">海外安全情報オープンデータ 提供情報</a>を加工・編集して作成</p>
+
+    </div>
+
+    <!--
+  <div id="search" class="text-center"><span id="closed-btn5" class="py-2 px-3 text-xs">閉じる</span>
+    <h3 class="text-2xl text-center mb-3"><i class="fa-solid fa-search"></i> 検　索</h3>
+
+    <input type="text" name="text1" id="text" class="mb-3 pl-2" size="15" autocomplete="off" autofocus
+      placeholder="キーワード検索" />
+    <div class="grid gap-2 grid-cols-2 grid-rows-1 mx-5">
+      <div id="exp" class="search_btn py-3">検　索</div>
+      <div id="exp" class="reset_btn py-3">リセット</div>
+    </div>
+
+    <div class="search_list1 overflow-y-scroll overview2 mt-5 mx-5"></div>
+
+  </div>-->
+
+  </div><!-- main -->
+
+
+  <div class="sns-fb">
+
+    <div class="fb-share-button" data-href="https://overseastravel17.netlify.app/" data-layout="button_count"
+      data-size="small"></div>
+
+  </div>
+
+  <div class="pagetop" id="pagetop">
+    <div class="pagetop_arrow"></div>
+  </div>
+
+  <!-- フッター -->
+  <div id="footer" class="footer p-2 text-center">
+    <p class="text-xs"><a href="https://github.com/linkevery2s/quest-and-answer" target="_blank">src on
+        GitHub</a>.
+      <i class="fa-regular fa-copyright"></i> <a href="https://hitoshi2s.netlify.app/" target="_blank">齋藤 仁志</a>. <a
+        href="https://docs.google.com/forms/d/e/1FAIpQLSf-WMoBJRTdA1bmN_SmQ-bsNGeLs1l737d3c9BUNuErjH-KBw/viewform"
+        target="_blank">お問い合わせ</a> ver 1.0
+    </p>
+
+  </div>
+
+  <script type="module">
+
+    $("#pagetop").hide();
+
+    $(window).scroll(function () {
+
+      if ($(window).scrollTop() > 400) {
+
+        $("#pagetop").fadeIn();
+
+      } else {
+
+        $("#pagetop").fadeOut();
+
+      }
+
+    });
+
+    const topButton = document.querySelector(".pagetop");
+    topButton.addEventListener("click", () => {
+
+      $('body,html').animate({ scrollTop: 0 }, 1000);
+      return false;
+
+    });
+
+    /*全画園表示　切り替え */
+    const zoom = document.querySelector('.zoom-btn');
+    const zoom2 = document.querySelector('.zoom-btn2');
+    const main = document.querySelector('.main');
+    const sns_fb = document.querySelector('.sns-fb');
+
+    zoom.addEventListener('click', () => {
+      $('#header').fadeOut();
+      $('#footer').fadeOut();
+
+      main.style.margin = "10px 0 0 0";
+      main.style.padding = "0";
+      zoom2.style.display = "block";
+      topButton.style.bottom = "4px";
+      sns_fb.style.display = "none";
+    });
+
+    zoom2.addEventListener('click', () => {
+      $('#header').fadeIn();
+      $('#footer').fadeIn();
+
+      main.style.margin = "80px 0 0 0";
+      main.style.padding = "0 0 70px 0";
+      zoom2.style.display = "none";
+      topButton.style.bottom = "37px";
+      sns_fb.style.display = "block";
+    });
+
+    /*const asia = document.querySelector(".asia");
+    const australia = document.querySelector(".australia");
+    const africa = document.querySelector(".africa");
+    const europe = document.querySelector(".europe");
+    const n_america = document.querySelector(".n_america");
+    const s_america = document.querySelector(".s_america");
+    const m_east = document.querySelector(".m_east");*/
+
+    const result = document.querySelector(".result");
+    const update = document.querySelector(".update");
+
+    let d = new Date();
+
+    console.log(d);
+
+    update.innerHTML = "データ取得日時：" + d.getFullYear() + '/' + ('0' + (d.getMonth() + 1)).slice(-2) + '/' + ('0' + d.getDate()).slice(-2) + ' ' + ('0' + d.getHours()).slice(-2) + ':' + ('0' + d.getMinutes()).slice(-2);
+
+    result.innerHTML = "<div class='my-3'>地図から調べたい地域を選択してください。</div>";
+
+    /* データ取得 */
+    const parser = new DOMParser();
+    const res = await fetch('https://www.ezairyu.mofa.go.jp/opendata/area/newarrivalA.xml');
+    const data = await res.text();
+    const txt = await parser.parseFromString(data, "text/xml");
+    const doc = txt.querySelectorAll("mail");
+    const arr = Array.from(doc);
+
+    console.log(arr);
+
+    window.show = (x) => {
+
+      result.innerHTML = "";
+
+      for (let i = 0; i < arr.length; i++) {
+
+        if (arr[i].querySelector("area").querySelector("cd").textContent == x) {
+
+          result.innerHTML += "<li class ='p-5'><div class='text-lg'>" + arr[i].querySelector("country").querySelector("name").textContent + "</div>" + arr[i].querySelector("title").textContent + "<br>" + arr[i].querySelector("lead").textContent + "</li>";
+
+        } else { }
+
+      }
+
+    };
+
+    /*asia.addEventListener("click", () => {
+
+      result.innerHTML = "<iframe src = './timeline.html#10' width='100%' height='400px' border='0'></iframe>";
+
+    });
+
+    australia.addEventListener("click", () => {
+
+      result.innerHTML = "<iframe src = './timeline.html#20' width='100%' height='400px' border='0'></iframe>";
+
+    });
+
+    africa.addEventListener("click", () => {
+
+      result.innerHTML = "<iframe src = './timeline.html#60' width='100%' height='400px' border='0'></iframe>";
+
+    });
+
+    europe.addEventListener("click", () => {
+
+      result.innerHTML = "<iframe src = './timeline.html#42' width='100%' height='400px' border='0'></iframe>";
+
+    });
+
+    n_america.addEventListener("click", () => {
+
+      result.innerHTML = "<iframe src = './timeline.html#30' width='100%' height='400px' border='0'></iframe>";
+
+    });
+
+    s_america.addEventListener("click", () => {
+
+      result.innerHTML = "<iframe src = './timeline.html#33' width='100%' height='400px' border='0'></iframe>";
+
+    });
+
+    m_east.addEventListener("click", () => {
+
+      result.innerHTML = "<iframe src = './timeline.html#50' width='100%' height='400px' border='0'></iframe>";
+
+    });
+
+    /* メニューポップアップ表示
+    const beginner_btn = document.querySelector('.beginner-btn');
+    const manual_btn = document.querySelector('.manual-btn');
+    const menu_btn = document.querySelector('.menu-btn');
+    const search_btn = document.querySelector('.search-btn');
+    const overlay = document.querySelector('#overlay');
+
+    beginner_btn.addEventListener('click', () => {
+      $('#overlay').fadeIn();
+      $('#beginner').fadeIn();
+    });
+
+    manual_btn.addEventListener('click', () => {
+      $('#overlay').fadeIn();
+      $('#manual').fadeIn();
+    });
+
+    menu_btn.addEventListener('click', () => {
+      $('#overlay').fadeIn();
+      $('#share').fadeIn();
+    });
+
+    search_btn.addEventListener('click', () => {
+      $('#overlay').fadeIn();
+      $('#search').fadeIn();
+    });
+
+    overlay.addEventListener('click', () => {
+      $('#overlay').fadeOut();
+      $('#beginner').fadeOut();
+      $('#manual').fadeOut();
+      $('#share').fadeOut();
+      $('#search').fadeOut();
+      $('#image-src').fadeOut();
+    });
+
+    /* 検索機能 
+    const search_list1 = document.querySelector('.search_list1');
+    const search_btn1 = document.querySelector('.search_btn');
+    const reset_btn1 = document.querySelector('.reset_btn');
+
+    search_list1.innerHTML = "";
+
+    let kensaku = text.value;
+
+    const res = await fetch('./data/src.json');
+    const data = await res.json();
+    const max = data.length;
+
+    window.search = (x) => {
+
+      $('body,html').animate({ scrollTop: $("#" + data[x - 1].key).offset().top - 65 }, 1000);
+      $('#overlay').fadeOut();
+      $('#search').fadeOut();
+
+      return false;
+
+    }
+
+    for (let j = 0; j < max; j++) {
+      search_list1.innerHTML += '<div class="item pl-3">' +
+        '<span class="item_ti" onclick="search(' + data[j].id + ')">' + data[j].title + '</span>' +
+        '</div>';
+    }
+
+    search_btn1.addEventListener('click', () => {
+
+      if (text.value != "") {
+
+        search_list1.innerHTML = "";
+
+        let kensaku = text.value;
+
+        for (let j = 0; j < max; j++) {
+          if (data[j].title.indexOf(kensaku) != -1) {
+            search_list1.innerHTML += '<div class="item pl-3">' +
+              '<span class="item_ti" onclick="search(' + data[j].id + ')">' + data[j].title + '</span>' +
+              '</div>';
+          }
+        }
+
+      } else { }
+
+    });
+
+    reset_btn1.addEventListener('click', () => {
+
+      search_list1.innerHTML = "";
+
+      for (let j = 0; j < max; j++) {
+        text.value = "";
+        search_list1.innerHTML += '<div class="item pl-3">' +
+          '<span class="item_ti" onclick="search(' + data[j].id + ')">' + data[j].title + '</span>' +
+          '</div>';
+      }
+
+    });*/
+
+    /* reload */
+    const update_btn = document.querySelector('.update-btn');
+
+    update_btn.addEventListener('click', () => {
+
+      window.location.reload();
+
+    });
+
+  </script>
+
+  <!-- Facebookシェアボタン -->
+  <div id="fb-root"></div>
+  <script async defer crossorigin="anonymous" src="https://connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v19.0"
+    nonce="Pm3nh7PB"></script>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-MPP84V2NHB"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-MPP84V2NHB');
+  </script>
+
+</body>
+
+</html>
