@@ -215,6 +215,13 @@
       position: absolute;
       bottom: 10px;
       left: 10px;
+      z-index: 2;
+      background: rgba(255, 255, 255, .7);
+      border: 1px solid #000000;
+      padding: .5rem;
+      cursor: pointer;
+      line-height: 1.2;
+      border-radius: .3em;
     }
 
     .worldmap {
@@ -372,7 +379,7 @@
   <div class="main">
 
     <div id="container">
-      <div class="button">自転</div>
+      <div class="button">自 転</div>
     </div>
 
     <!--<div class="worldmap">
@@ -523,7 +530,7 @@
     let initialViewState = {
       latitude: 20.983,
       longitude: 142.502,
-      zoom: .1
+      zoom: 0
     };
 
     let rotateCamera = () => {
@@ -598,12 +605,21 @@
 
       for (let i = 0; i < arr.length; i++) {
 
-        if (arr[i].querySelector("area").querySelector("cd").textContent == x) {
+        if (arr[i].querySelector("area") == null) { }
 
-          result.innerHTML += "<li class ='p-5'><div class='text-lg'>" + arr[i].querySelector("country").querySelector("name").textContent + "</div>" + arr[i].querySelector("title").textContent + "<br>" + arr[i].querySelector("lead").textContent + "</li>";
+        else {
 
-        } else { }
+          if (arr[i].querySelector("area").querySelector("cd").textContent == x) {
 
+            result.innerHTML += "<li class ='p-5'><div class='text-lg'>" + arr[i].querySelector("country").querySelector("name").textContent + "</div>" + arr[i].querySelector("title").textContent + "<br>" + arr[i].querySelector("lead").textContent + "</li>";
+
+          } else { }
+        }
+
+      }
+
+      if (result.innerHTML == '') {
+        result.innerHTML = "最新の情報はありません";
       }
 
     };
