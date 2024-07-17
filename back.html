@@ -55,7 +55,7 @@
       z-index: 5;
       background: rgba(255, 255, 255, .7);
       color: #000000;
-      border-bottom: 1px dotted #c8c2c6;
+      border-bottom: 1px dotted #000000;
     }
 
     .last_update {
@@ -104,7 +104,7 @@
     .new::before {
       content: attr(data-en);
       display: block;
-      color: rgba(44, 169, 225, .8);
+      color: rgba(230, 0, 51, .8);
       font-size: 15px;
     }
 
@@ -113,7 +113,7 @@
       display: block;
       width: 40px;
       height: 1px;
-      background-color: rgba(44, 169, 225, .8);
+      background-color: rgba(230, 0, 51, .8);
     }
 
     .result,
@@ -123,7 +123,7 @@
     }
 
     #manual_h3 {
-      border-bottom: 3px dotted rgba(44, 169, 225, .5);
+      border-bottom: 3px dotted rgba(230, 0, 51, .5);
       padding-bottom: 3px;
     }
 
@@ -173,7 +173,7 @@
       font-size: 1rem;
       cursor: pointer;
       line-height: 1.2;
-      border-radius: .3em;
+      border-radius: 100%;
     }
 
     .footer {
@@ -204,7 +204,7 @@
       position: fixed;
       right: 3px;
       bottom: 37px;
-      background: rgba(44, 169, 225, .8);
+      background: rgba(230, 0, 51, .8);
       border-radius: 50%;
       display: flex;
       justify-content: center;
@@ -225,69 +225,102 @@
       position: relative;
     }
 
-    .worldmap #area {
-      position: absolute;
-      color: #ffffff;
-      background: rgba(44, 169, 225, .8);
-      margin: 0 !important;
-      padding: .5em;
-      cursor: pointer;
-    }
-
     .worldmap .asia {
+      position: absolute;
       top: 35%;
       left: 38%;
       -ms-transform: translate(-38%, -35%);
       -webkit-transform: translate(-38%, -35%);
       transform: translate(-38%, -35%);
+      color: #ffffff;
+      background: rgba(230, 0, 51, .8);
+      margin: 0 !important;
+      padding: .5em;
+      cursor: pointer;
     }
 
     .worldmap .australia {
+      position: absolute;
       top: 75%;
       left: 45%;
       -ms-transform: translate(-45%, -75%);
       -webkit-transform: translate(-45%, -75%);
       transform: translate(-45%, -75%);
+      color: #ffffff;
+      background: rgba(230, 0, 51, .8);
+      margin: 0 !important;
+      padding: .5em;
+      cursor: pointer;
     }
 
     .worldmap .africa {
+      position: absolute;
       top: 50%;
       left: 5%;
       -ms-transform: translate(-5%, -50%);
       -webkit-transform: translate(-5%, -50%);
       transform: translate(-5%, -50%);
+      color: #ffffff;
+      background: rgba(230, 0, 51, .8);
+      margin: 0 !important;
+      padding: .5em;
+      cursor: pointer;
     }
 
     .worldmap .europe {
+      position: absolute;
       top: 10%;
       left: 5%;
       -ms-transform: translate(-5%, -10%);
       -webkit-transform: translate(-5%, -10%);
       transform: translate(-5%, -10%);
+      color: #ffffff;
+      background: rgba(230, 0, 51, .8);
+      margin: 0 !important;
+      padding: .5em;
+      cursor: pointer;
     }
 
     .worldmap .n_america {
+      position: absolute;
       top: 25%;
       right: 15%;
       -ms-transform: translate(-15%, -25%);
       -webkit-transform: translate(-15%, -25%);
       transform: translate(-15%, -25%);
+      color: #ffffff;
+      background: rgba(230, 0, 51, .8);
+      margin: 0 !important;
+      padding: .5em;
+      cursor: pointer;
     }
 
     .worldmap .s_america {
+      position: absolute;
       top: 70%;
       right: 5%;
       -ms-transform: translate(-5%, -70%);
       -webkit-transform: translate(-5%, -70%);
       transform: translate(-5%, -70%);
+      color: #ffffff;
+      background: rgba(230, 0, 51, .8);
+      margin: 0 !important;
+      padding: .5em;
+      cursor: pointer;
     }
 
     .worldmap .m_east {
+      position: absolute;
       top: 30%;
       left: 22%;
       -ms-transform: translate(-22%, -30%);
       -webkit-transform: translate(-22%, -30%);
       transform: translate(-22%, -30%);
+      color: #ffffff;
+      background: rgba(230, 0, 51, .8);
+      margin: 0 !important;
+      padding: .5em;
+      cursor: pointer;
     }
 
     ul {
@@ -305,33 +338,7 @@
     }
 
     li:nth-child(odd) {
-      background: rgba(242, 242, 242, .7);
-    }
-
-    input {
-      color: rgba(0, 119, 184, 0.5);
-      border: 1px solid rgba(0, 0, 0, .5);
-      font-size: 1.2em;
-      font-weight: bolder;
-      height: 45px;
-      width: 90%;
-    }
-
-    input::-webkit-input-placeholder {
-      color: rgba(0, 119, 184, .5);
-    }
-
-    #exp {
-      /*background: rgba(131, 204, 210, 1);*/
-      background: #2ca9e1;
-      font-weight: bolder;
-      border-radius: .3em;
-      color: #ffffff;
-      cursor: pointer;
-    }
-
-    #exp:hover {
-      background: #eb6ea5;
+      background: rgba(242, 242, 242, 0.7);
     }
   </style>
 
@@ -368,35 +375,25 @@
 
   <div class="main">
 
-    <p class="update mx-3 text-xs text-right"></p>
-
     <p class="new text-lg mx-3" data-en="Newly Arrived">新着</p>
 
     <div class="worldmap">
       <img src="./images/worldmap.jpg" width="100%">
-      <p id="area" class="asia text-xs md:text-lg" onclick="show(10);">アジア</p>
-      <p id="area" class="australia text-xs md:text-lg" onclick="show(20);">豪州</p>
-      <p id="area" class="africa text-xs md:text-lg" onclick="show(60);">アフリカ</p>
-      <p id="area" class="europe text-xs md:text-lg" onclick="show(42);">ヨーロッパ</p>
-      <p id="area" class="n_america text-xs md:text-lg" onclick="show(30);">北米</p>
-      <p id="area" class="s_america text-xs md:text-lg" onclick="show(33);">中南米</p>
-      <p id="area" class="m_east text-xs md:text-lg" onclick="show(50);">中東</p>
+      <p class="asia text-xs md:text-lg" onclick="show(10);">アジア</p>
+      <p class="australia text-xs md:text-lg" onclick="show(20);">豪州</p>
+      <p class="africa text-xs md:text-lg" onclick="show(60);">アフリカ</p>
+      <p class="europe text-xs md:text-lg" onclick="show(42);">ヨーロッパ</p>
+      <p class="n_america text-xs md:text-lg" onclick="show(30);">北米</p>
+      <p class="s_america text-xs md:text-lg" onclick="show(33);">中南米</p>
+      <p class="m_east text-xs md:text-lg" onclick="show(50);">中東</p>
 
     </div>
+
+    <p class="update mx-3 text-xs text-right"></p>
+
     <div class="result mt-3 mx-3"></div>
 
-    <hr class="mt-5">
-    <p class="new text-lg mx-3 my-5" data-en="Within a Month">直近１年以内</p>
-
-    <center>
-      <input type="text" name="text1" id="text" class="mb-3 pl-2" size="15" autocomplete="off" autofocus
-        placeholder="国名検索" />
-      <div class="grid gap-2 grid-cols-2 grid-rows-1 mx-5">
-        <div id="exp" class="search_btn py-3">検　索</div>
-        <div id="exp" class="reset_btn py-3">リセット</div>
-      </div>
-    </center>
-
+    <p class="new text-lg mx-3 mt-5" data-en="Within a Month">直近１ヶ月以内</p>
     <div class="result2 mt-3 mx-3"></div>
 
     <div class="mt-5 mx-3">
@@ -521,11 +518,10 @@
     update.innerHTML = "データ取得日時：" + d.getFullYear() + '/' + ('0' + (d.getMonth() + 1)).slice(-2) + '/' + ('0' + d.getDate()).slice(-2) + ' ' + ('0' + d.getHours()).slice(-2) + ':' + ('0' + d.getMinutes()).slice(-2);
 
     result.innerHTML = "<div class='my-3'>地図から調べたい地域を選択してください。</div>";
-    result2.innerHTML = "<div class='my-3'>検索ボックスから国名を入力してください。</div>";
+    result2.innerHTML = "<div class='my-3'>地図から調べたい地域を選択してください。</div>";
 
     /* データ取得 */
     /* 新着 */
-
     const parser = new DOMParser();
     const res = await fetch('https://www.ezairyu.mofa.go.jp/opendata/area/newarrivalA.xml');
     const data = await res.text();
@@ -534,6 +530,16 @@
     const arr = Array.from(doc);
 
     console.log(arr[0].querySelector("area"));
+
+    /* 直近１年以内 */
+    const parser2 = new DOMParser();
+    const res2 = await fetch('https://www.ezairyu.mofa.go.jp/opendata/area/00A.xml');
+    const data2 = await res2.text();
+    const txt2 = await parser2.parseFromString(data2, "text/xml");
+    const doc2 = txt2.querySelectorAll("mail");
+    const arr2 = Array.from(doc2);
+
+    console.log(arr2[0].querySelector("area"));
 
     window.show = (x) => {
 
@@ -560,116 +566,30 @@
         result.style.height = "100px";
       } else { }
 
-      /* 地図の色分け */
-      const area = document.querySelectorAll("#area");
-      const asia = document.querySelector(".asia");
-      const australia = document.querySelector(".australia");
-      const africa = document.querySelector(".africa");
-      const europe = document.querySelector(".europe");
-      const n_america = document.querySelector(".n_america");
-      const s_america = document.querySelector(".s_america");
-      const m_east = document.querySelector(".m_east");      
+      result2.innerHTML = "";
+      result2.style.height = "400px";
 
-      if (x == 10) {
-        asia.style.background = "rgba(235, 110, 165, .8)";
-        australia.style.background = "rgba(44, 169, 225, .8)";
-        africa.style.background = "rgba(44, 169, 225, .8)";
-        europe.style.background = "rgba(44, 169, 225, .8)";
-        n_america.style.background = "rgba(44, 169, 225, .8)";
-        s_america.style.background = "rgba(44, 169, 225, .8)";
-        m_east.style.background = "rgba(44, 169, 225, .8)";
+      for (let i = 0; i < 30; i++) {
 
-      } else if (x == 20 ){
-        asia.style.background = "rgba(44, 169, 225, .8)";
-        australia.style.background = "rgba(235, 110, 165, .8)";
-        africa.style.background = "rgba(44, 169, 225, .8)";
-        europe.style.background = "rgba(44, 169, 225, .8)";
-        n_america.style.background = "rgba(44, 169, 225, .8)";
-        s_america.style.background = "rgba(44, 169, 225, .8)";
-        m_east.style.background = "rgba(44, 169, 225, .8)";
+        if (arr2[i].querySelector("area") == null) { }
 
-      }else if(x == 60){
-        asia.style.background = "rgba(44, 169, 225, .8)";
-        australia.style.background = "rgba(44, 169, 225, .8)";
-        africa.style.background = "rgba(235, 110, 165, .8)";
-        europe.style.background = "rgba(44, 169, 225, .8)";
-        n_america.style.background = "rgba(44, 169, 225, .8)";
-        s_america.style.background = "rgba(44, 169, 225, .8)";
-        m_east.style.background = "rgba(44, 169, 225, .8)";
+        else {
 
-      }else if(x == 42){
-        asia.style.background = "rgba(44, 169, 225, .8)";
-        australia.style.background = "rgba(44, 169, 225, .8)";
-        africa.style.background = "rgba(44, 169, 225, .8)";
-        europe.style.background = "rgba(235, 110, 165, .8)";
-        n_america.style.background = "rgba(44, 169, 225, .8)";
-        s_america.style.background = "rgba(44, 169, 225, .8)";
-        m_east.style.background = "rgba(44, 169, 225, .8)";
+          if (arr2[i].querySelector("area").querySelector("cd").textContent == x) {
 
-      }else if(x == 30){
-        asia.style.background = "rgba(44, 169, 225, .8)";
-        australia.style.background = "rgba(44, 169, 225, .8)";
-        africa.style.background = "rgba(44, 169, 225, .8)";
-        europe.style.background = "rgba(44, 169, 225, .8)";
-        n_america.style.background = "rgba(235, 110, 165, .8)";
-        s_america.style.background = "rgba(44, 169, 225, .8)";
-        m_east.style.background = "rgba(44, 169, 225, .8)";
+            result2.innerHTML += "<li class ='p-5'><div class='text-lg'>" + arr2[i].querySelector("country").querySelector("name").textContent + "</div>" + arr2[i].querySelector("title").textContent + "<br>" + arr2[i].querySelector("lead").textContent + "</li>";
 
-      }else if(x == 33){
-        asia.style.background = "rgba(44, 169, 225, .8)";
-        australia.style.background = "rgba(44, 169, 225, .8)";
-        africa.style.background = "rgba(44, 169, 225, .8)";
-        europe.style.background = "rgba(44, 169, 225, .8)";
-        n_america.style.background = "rgba(44, 169, 225, .8)";
-        s_america.style.background = "rgba(235, 110, 165, .8)";
-        m_east.style.background = "rgba(44, 169, 225, .8)";
+          } else { }
+        }
 
-      }else if(x == 50){
-        asia.style.background = "rgba(44, 169, 225, .8)";
-        australia.style.background = "rgba(44, 169, 225, .8)";
-        africa.style.background = "rgba(44, 169, 225, .8)";
-        europe.style.background = "rgba(44, 169, 225, .8)";
-        n_america.style.background = "rgba(44, 169, 225, .8)";
-        s_america.style.background = "rgba(44, 169, 225, .8)";
-        m_east.style.background = "rgba(235, 110, 165, .8)";
-
-      }else{}
-
-    };
-
-    /* 直近１年以内 
-    const parser2 = new DOMParser();
-    const res2 = await fetch('https://www.ezairyu.mofa.go.jp/opendata/area/00A.xml');
-    const data2 = await res2.text();
-    const txt2 = await parser2.parseFromString(data2, "text/xml");
-    const doc2 = txt2.querySelectorAll("mail");
-    const arr2 = Array.from(doc2);
-
-    console.log(arr2[0].querySelector("area"));
-
-    result2.innerHTML = "";
-    result2.style.height = "400px";
-
-    for (let i = 0; i < 30; i++) {
-
-      if (arr2[i].querySelector("area") == null) { }
-
-      else {
-
-        if (arr2[i].querySelector("area").querySelector("cd").textContent == x) {
-
-          result2.innerHTML += "<li class ='p-5'><div class='text-lg'>" + arr2[i].querySelector("country").querySelector("name").textContent + "</div>" + arr2[i].querySelector("title").textContent + "<br>" + arr2[i].querySelector("lead").textContent + "</li>";
-
-        } else { }
       }
 
-    }
+      if (result2.innerHTML == '') {
+        result2.innerHTML = "<div class='mt-3'>直近１ヶ月以内の情報はありません。</div>";
+        result2.style.height = "100px";
+      } else { }
 
-    if (result2.innerHTML == '') {
-      result2.innerHTML = "<div class='mt-3'>直近１ヶ月以内の情報はありません。</div>";
-      result2.style.height = "100px";
-    } else { } */
-
+    };
 
     /* reload */
     const update_btn = document.querySelector('.update-btn');
