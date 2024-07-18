@@ -571,11 +571,10 @@
         
         result.innerHTML += "</ul>";
         
-        $('body,html').animate({scrollTop: $("#list").offset().top}, 0);
 
       }
 
-      if (result.innerHTML == '') {
+      if (result.innerHTML == "<ul id='list'></ul>") {
         result.innerHTML = "<div class='mt-3'>最新の情報はありません。</div>";
         result.style.height = "100px";
       } else { }
