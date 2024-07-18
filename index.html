@@ -765,7 +765,7 @@ const countries = [
 
         else {
 
-          if (arr2[i].querySelector("country").querySelector("name").textContent.indexOf(textbox.value) === 0 ) {
+          if (arr2[i].querySelector("country").querySelector("name").textContent === textbox.value) {
 
             result2.innerHTML += "<li class ='p-5'><div class='text-lg'>" + arr2[i].querySelector("country").querySelector("name").textContent + "</div>" + arr2[i].querySelector("title").textContent + "<br>" + arr2[i].querySelector("lead").textContent + "</li>";
 
