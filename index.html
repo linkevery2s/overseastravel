@@ -553,7 +553,7 @@
 
     window.show = (x) => {
 
-      result.innerHTML = "";
+      result.innerHTML = "<ul id='list'>";
       result.style.height = "400px";
 
       for (let i = 0; i < arr.length; i++) {
@@ -568,6 +568,10 @@
 
           } else { }
         }
+        
+        result.innerHTML += "</ul>";
+        
+        $('body,html').animate({scrollTop: $("#list").offset().top}, 0);
 
       }
 
