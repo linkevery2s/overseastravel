@@ -658,9 +658,7 @@
 
 const countries = [
   "アイスランド", "アイルランド", "アゼルバイジャン", "アフガニスタン",
-  "アメリカ合衆国／米国（グアム）", "アメリカ合衆国／米国（ハワイ）",
-  "アメリカ合衆国／米国（北マリアナ諸島）", "アメリカ合衆国／米国（本土）",
-  "アラブ首長国連邦", "アルジェリア", "アルゼンチン", "アルバニア",
+  "アメリカ合衆国／米国", "アラブ首長国連邦", "アルジェリア", "アルゼンチン", "アルバニア",
   "アルメニア", "アンゴラ", "アンティグア・バーブーダ", "アンドラ",
   "イエメン", "イスラエル", "イタリア", "イラク", "イラン", "インド",
   "インドネシア", "ウガンダ", "ウクライナ", "ウズベキスタン", "ウルグアイ",
@@ -697,7 +695,7 @@ const countries = [
   "モロッコ", "モンゴル", "モンテネグロ", "ヨルダン", "ラオス", "ラトビア",
   "リトアニア", "リビア", "リヒテンシュタイン", "リベリア", "ルーマニア",
   "ルクセンブルク", "ルワンダ", "レソト", "レバノン", "ロシア",
-  "英国／イギリス／グレートブリテン及び北部アイルランド連合王国", "香港",
+  "英国／イギリス", "香港",
   "西サハラ", "赤道ギニア", "台湾", "大韓民国／韓国", "中央アフリカ",
   "中華人民共和国／中国", "東ティモール", "南アフリカ共和国", "南スーダン",
   "北マケドニア共和国", "北朝鮮"
@@ -763,7 +761,7 @@ const countries = [
 
         else {
 
-          if (arr2[i].querySelector("country").querySelector("name").textContent == textbox.value) {
+          if (arr2[i].querySelector("country").querySelector("name").textContent.indexOf(textbox.value) > -1 ) {
 
             result2.innerHTML += "<li class ='p-5'><div class='text-lg'>" + arr2[i].querySelector("country").querySelector("name").textContent + "</div>" + arr2[i].querySelector("title").textContent + "<br>" + arr2[i].querySelector("lead").textContent + "</li>";
 
