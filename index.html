@@ -126,6 +126,7 @@
     .result2 {
       height: 100px;
       overflow-y: scroll;
+      border: 2px dotted rgba(44, 169, 225, .5);
     }
 
     #manual_h3 {
@@ -415,9 +416,38 @@
 
       <h3 class="text-2xl mb-5" id="manual_h3"><i class="fa-solid fa-plane"></i> はじめに</h3>
 
-      <p class="mt-5 mx-3">
-        世界中で、様々な紛争や災害、事件、政府に対する抗議デモなどが起きています。「最新の情報」を公開しているデータを探していたところ、外務省のオープンデータを見つけました。世界の大使館などから発せられる情報を地域、国名から検索できます。世界情勢を知りたい方、海外旅行などで、その地域に行くときの参考情報としてご活用いただければと思います。
-      </p>
+      <p class="mt-5 mx-3">世界中で、様々な紛争や災害、事件、政府に対する抗議デモなどが起きています。</p>
+
+      <p class="mt-5 mx-3">世界では紛争が絶えません。</p>
+
+      <p class="mt-5 mx-3">「自分に出来ることは何か、ないだろうか？」</p>
+
+      <p class="mt-5 mx-3">学生の頃から、抱いていた社会テーマの一つです。</p>
+
+      <p class="mt-5 mx-3">20代後半、シビックテックに出会い、その活動の面白さ／素晴らしさを感じていました。</p>
+
+      <p class="mt-5 mx-3">「テックで何か、できないかな？」</p>
+
+      <p class="mt-5 mx-3">「まずは世界で何が起きているのか、知ることから始めてみよう！」</p>
+        
+      <p class="mt-5 mx-3">そう思い立ち、今、世界でどんなことが起きているのか知りたいと思い文献を調べていたところ、外務省のオープンデータを見つけました。</p>
+        
+      <p class="mt-5 mx-3">世界の大使館などから発せられる情報を地域、国名から検索できます。</p>
+        
+      <p class="mt-5 mx-3">「この国の治安は、こうなっているんだ。テレビと印象が違うなぁ。」</p>
+
+      <p class="mt-5 mx-3">「問題解決のため、国・政府の取り組みはどんなことをやっているんだろう？」</p>
+
+      <p class="mt-5 mx-3">「自由のため、抗議デモやストライキを起こしている国々もあるんだな。」</p>
+
+      <p class="mt-5 mx-3">「今度、あそこの国に旅行に行くんだけど、今は安全かな？」</p>
+      
+      <p class="mt-5 mx-3">などなど、世界情勢を知りたい方の参考情報としてご活用いただければと思います。</p>
+
+      <p class="mt-5 mx-3">最後に、世界が少しでも平和に近づくことを願ってやみません。</p>
+
+      <p class="mt-5 mx-3">齋藤　仁志.</p>
+
 
       <h3 class="text-2xl mt-10 mb-5" id="manual_h3"><i class="fa-solid fa-plane"></i> インストール方法</h3>
 
@@ -542,8 +572,8 @@
 
     update.innerHTML = "データ取得日時：" + d.getFullYear() + '/' + ('0' + (d.getMonth() + 1)).slice(-2) + '/' + ('0' + d.getDate()).slice(-2) + ' ' + ('0' + d.getHours()).slice(-2) + ':' + ('0' + d.getMinutes()).slice(-2);
 
-    result.innerHTML = "<div class='my-3'>地図から調べたい地域を選択してください。</div>";
-    result2.innerHTML = "<div class='my-3'>検索ボックスから国名を入力し検索ボタンをタップしてください。</div>";
+    result.innerHTML = "<div class='my-3 pl-3'>地図から調べたい地域を選択してください。</div>";
+    result2.innerHTML = "<div class='my-3 pl-3'>検索ボックスから国名を入力し検索ボタンをタップしてください。</div>";
 
     /* データ取得 */
     /* 新着 */
@@ -579,7 +609,7 @@
       result.scrollTop = 0;
 
       if (result.innerHTML == "") {
-        result.innerHTML = "<div class='mt-3'>最新の情報はありません。</div>";
+        result.innerHTML = "<div class='mt-3 pl-3'>最新の情報はありません。</div>";
         result.style.height = "100px";
       } else { }
 
@@ -798,7 +828,7 @@
       result2.scrollTop = 0;
 
       if (result2.innerHTML == '') {
-        result2.innerHTML = "<div class='mt-3'>直近１年以内の情報はありません。</div>";
+        result2.innerHTML = "<div class='mt-3 pl-3'>直近１年以内の情報はありません。</div>";
         result2.style.height = "100px";
       } else { }
 
@@ -809,7 +839,7 @@
     reset_btn.addEventListener("click", () => {
 
       textbox.value = "";
-      result2.innerHTML = "<div class='my-3'>検索ボックスから国名を入力し検索ボタンをタップしてください。</div>";
+      result2.innerHTML = "<div class='my-3 pl-3'>検索ボックスから国名を入力し検索ボタンをタップしてください。</div>";
       result2.style.height = "100px";
       textbox.focus();
 
